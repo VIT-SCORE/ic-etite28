@@ -64,29 +64,6 @@
     sections.forEach(function(s){ spy.observe(s); });
   }
 
-  /* ---------- Countdown timer (any page with #countdown) ---------- */
-  var countdownEl = document.getElementById('countdown');
-  if(countdownEl){
-    var deadline = new Date('2026-01-25T23:59:59');
-    var d = document.getElementById('cd-days'),
-        h = document.getElementById('cd-hours'),
-        m = document.getElementById('cd-mins'),
-        s = document.getElementById('cd-secs');
-    function tick(){
-      var diff = deadline - new Date();
-      if(diff <= 0){
-        d.textContent = h.textContent = m.textContent = s.textContent = '00';
-        return;
-      }
-      d.textContent = String(Math.floor(diff / 86400000)).padStart(2,'0');
-      h.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
-      m.textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
-      s.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
-    }
-    tick();
-    setInterval(tick, 1000);
-  }
-
   /* ---------- Marquee content (any page with #marqueeTrack) ---------- */
   var track = document.getElementById('marqueeTrack');
   if(track){
@@ -140,7 +117,7 @@
   if(yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------- One orchestrated hero entrance ---------- */
-  var heroEls = document.querySelectorAll('.hero .eyebrow-row, .hero h1, .hero .lead, .hero-meta, .hero-actions, .countdown-card, .page-hero .crumb, .page-hero h1, .page-hero p');
+  var heroEls = document.querySelectorAll('.hero h1, .hero .lead, .hero-sponsor, .hero-date, .hero-meta, .hero-actions, .hero-links, .page-hero .crumb, .page-hero h1, .page-hero p');
   heroEls.forEach(function(el, i){
     el.style.opacity = '0';
     el.style.transform = 'translateY(14px)';
