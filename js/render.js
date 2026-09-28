@@ -41,10 +41,10 @@
   }
 
   function renderCommittee() {
-    var mount = document.getElementById('committee-data');
-    if (!mount || !window.COMMITTEE) return;
+    var mount = document.getElementById('committee-app');
+    if (!mount || !window.COMMITTEE || !window.ADVISORY) return;
 
-    var labels = {
+    var groupLabels = {
       chiefPatron: 'Chief Patron',
       patrons: 'Patrons',
       organizingChair: 'Organizing Chair',
@@ -66,17 +66,29 @@
       conferenceCoordinatingCommittee: 'Conference Coordinating Committee',
       executiveAdvisoryCommittee: 'Executive Advisory Committee'
     };
+    var committeeTabs = [
+      { key: 'organizing', label: 'Organizing Committee', default: 'organizing', records: Object.keys(groupLabels).reduce(function (all, key) { return all.concat(window.COMMITTEE[key] || []); }, []) },
+      { key: 'international', label: 'International Advisory', records: window.ADVISORY.international },
+      { key: 'national', label: 'National Advisory', records: window.ADVISORY.national },
+      { key: 'technical', label: 'Technical Committee', records: window.ADVISORY.technical }
+    ];
+    var activeKey = mount.dataset.active || 'organizing';
+    var knownKeys = committeeTabs.map(function (tab) { return tab.key; });
 
-    var content = element('div', 'committee-data');
-    Object.keys(labels).forEach(function (key) {
-      var members = window.COMMITTEE[key] || [];
-      if (!members.length) return;
+    function recordsForOrganizing(query) {
+      var groups = [];
+      Object.keys(groupLabels).forEach(function (key) {
+        var people = (window.COMMITTEE[key] || []).filter(function (person) {
+          return person.name.toLowerCase().indexOf(query) !== -1;
+        });
+        if (people.length) groups.push({ label: groupLabels[key], people: people });
+      });
+      return groups;
+    }
 
-      var group = element('section', 'committee-data-group');
-      var heading = element('h2', '', labels[key]);
+    function renderCards(records) {
       var cards = element('div', 'card-grid');
-      group.appendChild(heading);
-      members.forEach(function (person) {
+      records.forEach(function (person) {
         var card = element('article', 'simple-card');
         var initials = person.name.replace(/^(Dr\\.|Prof\\.|Mr\\.|Ms\\.)\\s*/i, '').charAt(0);
         card.appendChild(element('div', 'avatar-ring', initials));
@@ -85,13 +97,140 @@
         card.appendChild(element('p', '', person.affiliation));
         cards.appendChild(card);
       });
-      group.appendChild(cards);
-      content.appendChild(group);
+      return cards;
+    }
+
+    function renderContacts() {
+      var block = element('section', 'committee-contact-block');
+      block.appendChild(element('h2', '', 'Conference Contacts'));
+      var grid = element('div', 'committee-contact-grid');
+      (window.CONTACTS || []).forEach(function (contact) {
+        var card = element('article', 'committee-contact-card');
+        card.appendChild(element('span', 'contact-role', contact.role));
+        card.appendChild(element('h3', '', contact.name));
+        card.appendChild(element('p', '', contact.designation));
+        var links = element('div', 'committee-contact-links');
+        var email = element('a', '', contact.email);
+        email.href = 'mailto:' + contact.email;
+        links.appendChild(email);
+        var phone = element('a', '', contact.phone);
+        phone.href = 'tel:' + contact.phone.replace(/[^+\\d]/g, '');
+        links.appendChild(phone);
+        card.appendChild(links);
+        grid.appendChild(card);
+      });
+      block.appendChild(grid);
+      return block;
+    }
+
+    function buildPanel(tab) {
+      var panel = element('div', 'committee-tabpanel');
+      panel.id = 'committee-panel-' + tab.key;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', 'committee-tab-' + tab.key);
+      panel.tabIndex = 0;
+
+      var searchRow = element('div', 'committee-search-row');
+      var label = element('label', '', 'Search names');
+      var search = element('input', 'committee-search');
+      search.type = 'search';
+      search.placeholder = 'Filter names';
+      search.setAttribute('aria-label', 'Search names in ' + tab.label);
+      label.appendChild(search);
+      var count = element('p', 'committee-count');
+      count.setAttribute('aria-live', 'polite');
+      searchRow.appendChild(label);
+      searchRow.appendChild(count);
+      panel.appendChild(searchRow);
+
+      var results = element('div', 'committee-results');
+      panel.appendChild(results);
+
+      function update(query) {
+        query = query.trim().toLowerCase();
+        if (tab.key === 'organizing') {
+          var groups = recordsForOrganizing(query);
+          var shown = groups.reduce(function (total, group) { return total + group.people.length; }, 0);
+          count.textContent = 'Showing ' + shown + ' of ' + tab.records.length;
+          results.replaceChildren();
+          groups.forEach(function (group) {
+            var section = element('div', 'committee-data-group');
+            section.appendChild(element('h3', '', group.label));
+            section.appendChild(renderCards(group.people));
+            results.appendChild(section);
+          });
+          return;
+        }
+        var filtered = tab.records.filter(function (person) { return person.name.toLowerCase().indexOf(query) !== -1; });
+        count.textContent = 'Showing ' + filtered.length + ' of ' + tab.records.length;
+        results.replaceChildren(renderCards(filtered));
+      }
+
+      search.addEventListener('input', function () { update(search.value); });
+      update('');
+      return panel;
+    }
+
+    var shell = element('div', 'committee-tabs-component');
+    shell.appendChild(renderContacts());
+    var tabList = element('div', 'committee-tabs');
+    tabList.setAttribute('role', 'tablist');
+    tabList.setAttribute('aria-label', 'Conference committees');
+    var panels = element('div', 'committee-tabpanels');
+
+    function activate(key, updateHash) {
+      if (knownKeys.indexOf(key) === -1) key = mount.dataset.active === 'international' ? 'international' : 'organizing';
+      activeKey = key;
+      committeeTabs.forEach(function (tab) {
+        var button = tabList.querySelector('#committee-tab-' + tab.key);
+        var panel = panels.querySelector('#committee-panel-' + tab.key);
+        var selected = tab.key === activeKey;
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+        button.classList.toggle('active', selected);
+        panel.hidden = !selected;
+        if (selected) {
+          var search = panel.querySelector('.committee-search');
+          if (search && search.value) {
+            search.value = '';
+            search.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+      });
+      if (updateHash && window.location.hash !== '#' + key) window.location.hash = key;
+    }
+
+    committeeTabs.forEach(function (tab, index) {
+      var button = element('button', 'committee-tab', tab.label);
+      button.type = 'button';
+      button.id = 'committee-tab-' + tab.key;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-controls', 'committee-panel-' + tab.key);
+      button.setAttribute('aria-selected', 'false');
+      button.tabIndex = -1;
+      button.addEventListener('click', function () { activate(tab.key, true); });
+      button.addEventListener('keydown', function (event) {
+        var nextIndex = index;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % committeeTabs.length;
+        else if (event.key === 'ArrowLeft') nextIndex = (index + committeeTabs.length - 1) % committeeTabs.length;
+        else if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = committeeTabs.length - 1;
+        else return;
+        event.preventDefault();
+        var nextTab = committeeTabs[nextIndex];
+        tabList.querySelector('#committee-tab-' + nextTab.key).focus();
+        activate(nextTab.key, true);
+      });
+      tabList.appendChild(button);
+      panels.appendChild(buildPanel(tab));
     });
 
-    mount.replaceChildren(content);
-    var main = mount.closest('main');
-    if (main) main.replaceChildren(mount);
+    shell.appendChild(tabList);
+    shell.appendChild(panels);
+    mount.replaceChildren(shell);
+    var initialKey = window.location.hash.slice(1) || mount.dataset.active || 'organizing';
+    activate(initialKey, !window.location.hash && mount.dataset.active === 'international');
+    window.addEventListener('hashchange', function () { activate(window.location.hash.slice(1), false); });
   }
 
   function renderHomeDates() {

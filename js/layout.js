@@ -64,7 +64,7 @@
             '<a class="nav-link" href="tracks.html">Paper Presentation Tracks</a>') +
           navLink('contact.html', 'Contact') +
           dropdown('More', 'moreDropdown',
-            '<a class="nav-link" href="advisory.html">Advisory Board</a>' +
+            '<a class="nav-link" href="advisory.html#international">Advisory Board</a>' +
             '<a class="nav-link" href="venue.html">Campus Venue &amp; Travel</a>' +
             '<a class="nav-link" href="visa.html">Visa &amp; Travel Information</a>' +
             '<a class="nav-link" href="team.html">Web Development Team</a>' +

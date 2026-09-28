@@ -111,6 +111,7 @@ window.ADVISORY = {
     ['Dr. K. A. Abdul Nazeer', 'Professor, CSE, NIT Calicut'],
     ['Dr. S. D. Madhu Kumar', 'Professor, CSE, NIT Calicut'],
     ['Dr. Manju Khari', 'Professor, Ambedkar Institute of Advanced Communication Technologies and Research, Delhi'],
+    // TODO: Confirm the conflicting IIIT Kottayam / Delhi affiliation; do not infer a correction.
     ['Dr. M. P. Rajan', 'Professor and Dean, IIIT Kottayam; PDF also says Delhi (affiliation needs confirmation)'],
     ['Dr. Shajin Nargunam', 'Director, Academic Affairs, Noorul Islam University, Kumaracoil'],
     ['Dr. P. Kumar', 'Centre for Information Technology & Engineering, Manonmaniam Sundaranar University, Tirunelveli'],

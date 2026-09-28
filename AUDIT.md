@@ -14,6 +14,7 @@
 | `call-for-papers.html` | Renamed from `authors.html`; author guidance and dates |
 | `registration.html` | Renamed from `registrations.html`; fees and registration steps |
 | `committees.html` | Renamed from `committee.html`; renders organizing rosters from data |
+| `advisory.html` | Thin entry page to the shared committee tabs, initially on International Advisory |
 | `sponsorship.html` | Sponsorship information; retained outside the target sitemap |
 | `icetite20.html` | Historical ic-ETITE'20 page; retained outside the target sitemap |
 | `visa.html` | Visa information |
@@ -25,7 +26,7 @@ Redirect stubs remain at `authors.html`, `registrations.html`, `committee.html`,
 
 ## Target Sitemap Status
 
-The live target has 16 routes. Ten canonical pages now exist; the eight requested pages deliberately deferred to later steps are `about.html`, `advisory.html`, `tracks.html`, `important-dates.html`, `events.html`, `hackathon.html`, `technext.html`, and `team.html`. Header/footer links to those not-yet-created pages are intentional for this intermediate step. The live target routes were previously checked and returned HTTP 200.
+The live target has 16 routes. Eleven canonical pages now exist. The seven requested pages deliberately deferred to later steps are `about.html`, `tracks.html`, `important-dates.html`, `events.html`, `hackathon.html`, `technext.html`, and `team.html`. Header/footer links to those not-yet-created pages are intentional for this intermediate step. The live target routes were previously checked and returned HTTP 200.
 
 ## Styles, Scripts, and Data
 
@@ -48,10 +49,14 @@ The live target has 16 routes. Ten canonical pages now exist; the eight requeste
 - 2020 event details in `icetite20.html` and references to the SITE acronym in historical affiliation/source data are intentional context. The old `ic-ETITE '26` page titles have been corrected to `ic-ETITE'28`.
 - External link reachability and embedded image text have not been exhaustively checked.
 
-## Step 2-3 Browser Checks
+## Step 2-3 and 7 Browser Checks
 
 - Fee renderer: 7 rows displayed from `data/fees.js` on `registration.html`.
 - Committee renderer: 20 groups and 79 people displayed from `data/committee.js` on `committees.html`; the previous fictional placeholder names are gone.
+- The shared accessible tab component on `committees.html` and `advisory.html` renders 79 organizing members, 41 international advisors, 47 national advisors, and 24 technical committee members. The international and national data are deduplicated with no repeated names. Dr. M. P. Rajan's unresolved affiliation remains flagged in both visible data and a source comment.
+- Tabs expose tab/tablist/tabpanel roles, update hashes (`#organizing`, `#international`, `#national`, `#technical`), support touch/click and arrow/Home/End keyboard activation, and filter names with live “Showing n of total” counts. `advisory.html` uses the same renderer and opens `#international`; it duplicates no roster data.
+- Search check: “raija” filters the international tab to Dr. Raija Halonen and reports “Showing 1 of 41”. All four full roster counts match source expectations.
+- Both `committees.html` and `advisory.html` were checked at 360, 768, and 1280 px; neither has document overflow. The tab strip scrolls horizontally at 360 px. Roster tab arrow/End/Enter and touch-like click activation update focus, selection, and URL hash.
 - All ten canonical pages were checked at 360, 768, and 1280 px. Header and footer mounts rendered, page titles contained ic-ETITE'28, images loaded, and no horizontal overflow was observed.
 - Mobile hamburger opens and exposes its expanded state; keyboard Enter opens dropdowns. CSS/JS diagnostics and whitespace checks passed.
 
@@ -91,4 +96,4 @@ The 360/768/1280 browser pass found no page/header overflow or broken images. At
 - Confirm Dr. M. P. Rajan's affiliation; the PDF includes both IIIT Kottayam and “Delhi”.
 - Confirm the spellings “Sarakar” and “Computation Intelligence” with organizers.
 - Name 2028 keynote speakers when confirmed; none are provided in the source.
-- Provide the remaining eight target pages listed above in their later implementation steps.
+- Provide the remaining seven target pages listed above in their later implementation steps.
