@@ -1,4 +1,4 @@
-# Agent Prompt: Build the ic-ETITE'28 Conference Website
+# Agent Prompt: Build the ic-ETITE'28 Website (Plain HTML, CSS, JavaScript)
 
 Paste this whole document into your coding agent (Claude Code, Cursor, Copilot Agent, etc.) from the root of the cloned repo. Ask it to work **one step at a time** and stop for your review after each step.
 
@@ -6,169 +6,164 @@ Paste this whole document into your coding agent (Claude Code, Cursor, Copilot A
 
 ## 0. Role and Goal
 
-You are a senior front-end engineer. Upgrade the existing **ic-ETITE'24** website into the **ic-ETITE'28** website.
+You are a senior front-end developer. Update the existing **ic-ETITE'24** website into the **ic-ETITE'28** website.
 
-- **Repo to work in:** https://github.com/VIT-SCORE/ic-etite28.git
-- **Reference site (structure and look to preserve):** https://icetite.vercel.app/
-- **Content source:** the attached `writeup_updated_Sept22.pdf` (the content is reproduced in Appendix A of this document, so you do not need to open the PDF).
+- **Repo to work in:** https://github.com/VIT-SCORE/ic-etite28.git (plain HTML/CSS/JS, no framework)
+- **Reference site (look and page structure to preserve):** https://icetite.vercel.app/
+- **Content source:** the attached `writeup_updated_Sept22.pdf`. Its content is reproduced in Appendix A of this document, so you do not need to open the PDF.
 
-The reference site is a Next.js app (pages router, `next/image`, deployed on Vercel). Keep the same stack, layout, navigation and visual style. Change the **content and year**, add what is new, and fix the issues listed in Step 9.
+Keep the same page layout, navigation and visual style as the reference site. Change the content and year, add what is new, and fix the issues in Step 9.
 
 ## Ground rules
 
-1. Inspect the repo first. Do not assume a folder layout, CSS approach or data format. Follow whatever is already there.
-2. Do not add new dependencies unless you have to. If you do, say why.
-3. Keep all changeable content (dates, fees, committees, topics) in data files under `data/` or `content/`, not hard-coded into JSX.
-4. Never invent facts, names, links or numbers. If something is missing, insert a clearly marked `TODO:` placeholder and list it in the final report.
-5. After each step, run `npm run build` (or the repo's equivalent) and confirm it passes before moving on.
-6. Make one commit per step with a clear message, e.g. `step-3: rebrand home page to ic-ETITE'28`.
+1. **No frameworks and no build step.** Do not add React, Next.js, Tailwind, npm packages or a bundler. Use only HTML, CSS and vanilla JavaScript. The site must work when `index.html` is opened directly or served by any static host.
+2. Inspect the repo first. Follow the existing folder layout, file names, CSS class naming and coding style. Do not restructure things that already work.
+3. Keep changeable content (dates, fees, committees, topics) in data files, not hard-coded into every page (see Step 2).
+4. Never invent facts, names, links or numbers. If something is missing, insert a visible `TODO:` placeholder in a comment and list it in the final report.
+5. Use semantic HTML (`header`, `nav`, `main`, `section`, `footer`), and write mobile-first, responsive CSS.
+6. Test in the browser after each step by opening the page, or run `npx serve .` or `python3 -m http.server` for a local server.
+7. Make one commit per step with a clear message, e.g. `step-3: update home page for ic-ETITE'28`.
 
 ---
 
 ## Step 1: Audit the repository
 
-1. Read `package.json`, `next.config.js`, the `pages/` (or `app/`) directory, `components/`, `public/` and any `data/` files.
-2. Write `AUDIT.md` with: framework and version, styling method, the list of routes, where each page gets its content, and which strings and assets still say 2024 or 2020.
-3. Compare the routes against the reference site. It should have: `/`, `/authors`, `/registrations`, `/speakers`, `/committee`, `/sponsorship`, `/icetite20`, `/bolt`, `/visa`, `/contact`.
-4. Run `npm install` and `npm run dev`. Note any warnings.
+1. List every file. Note the pages, the CSS files (one shared file or several), the JS files, the `images/` or `assets/` folders, and how the header and footer are shared (copied into each page, or injected by JS).
+2. Write `AUDIT.md` with: page list, CSS and JS files and what each does, image inventory, and every place that still says 2024 or 2020 (search for `2024`, `24`, `SITE`, `cmt3`, `Expo'24`).
+3. Compare the pages against the reference site. The target pages are: `index.html`, `authors.html`, `registrations.html`, `speakers.html`, `committee.html`, `sponsorship.html`, `icetite24.html`, `icetite20.html`, `bolt.html`, `technext.html`, `visa.html`, `contact.html`. Use the repo's existing naming if it differs (for example `pages/authors.html`).
+4. Open the site locally and note any broken layout, broken links or missing images.
 
-**Done when:** `AUDIT.md` exists and the dev server runs. Stop and report.
-
----
-
-## Step 2: Centralise conference data
-
-Create `data/conference.js` (or `.json` or `.ts`, matching the repo) with:
-
-```
-name: "ic-ETITE'28"
-edition: "Third"
-fullTitle: "Third IEEE International Conference on Emerging Trends in Information Technology and Engineering"
-dates: "10-11 February 2028"
-venue: "Vellore Institute of Technology (VIT), Vellore, India"
-cosponsor: "IEEE Madras Section"
-supportedBy: ["ACM India Council", "IEEE Information Theory Society, VIT"]
-organiser: "School of Computer Science Engineering and Information Systems (SCORE), VIT"
-email: "icetiteconference@vit.ac.in"
-submissionUrl: "https://easychair.org/conferences/?conf=icetite28"
-```
-
-Also add data files for: important dates, registration fees, topics, committees, previous editions (2020, 2024), and contacts. Use the values in Appendix A.
-
-**Done when:** no page defines conference facts on its own; every page imports them from `data/`.
+**Done when:** `AUDIT.md` exists. Stop and report.
 
 ---
 
-## Step 3: Home page (`/`)
+## Step 2: Centralise the data
 
-Keep the existing hero and section order. Update:
+Create a `data/` folder with plain JavaScript files that define global objects. Do not use `fetch()` on JSON files, because that breaks when the page is opened from disk.
 
-1. **Hero:** "Welcome to ic-ETITE'28", subtitle "Third International Conference on Emerging Trends in Information Technology and Engineering", "Technically co-sponsored by IEEE Madras Section", "10-11 February 2028 at VIT Vellore, India".
-2. **Buttons:** "PAPER SUBMISSION" links to the EasyChair URL. Keep "Download Brochure" but hide it if no brochure URL exists (do not link to the 2024 Google Drive file).
+- `data/conference.js`:
+  ```js
+  window.CONF = {
+    name: "ic-ETITE'28",
+    edition: "Third",
+    fullTitle: "Third IEEE International Conference on Emerging Trends in Information Technology and Engineering",
+    dates: "10-11 February 2028",
+    venue: "Vellore Institute of Technology (VIT), Vellore, India",
+    cosponsor: "IEEE Madras Section",
+    supportedBy: ["ACM India Council", "IEEE Information Theory Society, VIT"],
+    email: "icetiteconference@vit.ac.in",
+    submissionUrl: "https://easychair.org/conferences/?conf=icetite28",
+    address: "School of Computer Science Engineering and Information Systems, Vellore Institute of Technology, Vellore, Tamil Nadu, India 632014"
+  };
+  ```
+- `data/dates.js` (important dates), `data/fees.js` (registration table), `data/topics.js` (four groups), `data/committee.js` (one array per group; each person is `{ name, role, affiliation }`), `data/contacts.js`.
+- Fill them from Appendix A.
+
+Then write a small `js/render.js` with functions that build tables and lists from these objects and insert them into placeholder elements, e.g. `<div id="fees-table"></div>` and `<div id="committee"></div>`. Load the data files before `render.js` on each page that needs them.
+
+**Done when:** dates, fees and committees exist in one place only and pages render them from the data files.
+
+---
+
+## Step 3: Shared header and footer
+
+1. If the repo copies the header and footer into every page, keep doing that but update all pages consistently. If it uses a JS include, update the include.
+2. If there is no shared mechanism, create `js/layout.js` that injects the header and footer into `<div id="site-header">` and `<div id="site-footer">`, so navigation changes need only one edit.
+3. **Header nav:** Home, Conference (dropdown: Authors, Registrations, Speakers, Committee, Sponsorships, ic-ETITE'24, ic-ETITE'20), Technext'28, Visa, Contact. Keep the BOLT logo linking to the BOLT page. Remove "Expo'24".
+4. The dropdown must work with hover, keyboard focus and touch, and a mobile hamburger menu must work below 768px.
+5. **Footer:** Technical Co-sponsor (IEEE Madras) and Supported By logos (ACM and others that already exist in the repo), social icons, the new address from `CONF.address`, and the email. Keep the existing Instagram, Facebook and LinkedIn links only if still valid; otherwise add `TODO:` placeholders.
+6. Update `<title>`, meta description and Open Graph tags on every page to "ic-ETITE'28".
+
+---
+
+## Step 4: Home page (`index.html`)
+
+Keep the hero and section order. Update:
+
+1. **Hero:** "Welcome to ic-ETITE'28", "Third International Conference on Emerging Trends in Information Technology and Engineering (ic-ETITE'28)", "Technically co-sponsored by IEEE Madras Section", "10-11 February 2028 at VIT Vellore, India".
+2. **Buttons:** "PAPER SUBMISSION" links to the EasyChair URL. Hide "Download Brochure" unless a 2028 brochure exists. Do not link the 2024 Google Drive file.
 3. **Sections, in order:** About ic-ETITE'28, Theme of the Conference, Highlights of the Second ic-ETITE'24, Highlights of the First ic-ETITE'20, About VIT, Ranking & Accreditation, About SCORE, About IEEE Information Theory Society VIT, Manuscript Submission, Technical Co-sponsor and Supported By logos, Social links, Address.
-4. **Address:** School of Computer Science Engineering and Information Systems, Vellore Institute of Technology, Vellore, Tamil Nadu, India 632014. The 2024 site says "School of Information Technology and Engineering", so replace it.
-5. **Manuscript Submission text:** must mention plagiarism checking, no embedded links, scanned images, headers or footers, and that email submissions are not accepted.
-6. Replace the 2024 "Important Dates" content (if present on the page) with the new dates from Step 2.
-7. Remove the "Expo'24" nav item and add "Technext'28".
+4. The 2024 site says "School of Information Technology and Engineering". Replace it with the School of Computer Science Engineering and Information Systems (SCORE).
+5. The Manuscript Submission text must state: plagiarism check, no embedded links, scanned images, headers or footers, and no email submissions.
+6. Add an "Important Dates" block using `data/dates.js`.
 
 **Done when:** no "2024" remains on the home page except inside the "Highlights of ic-ETITE'24" section.
 
 ---
 
-## Step 4: Navigation and site-wide changes
-
-1. Update `<title>`, meta description and Open Graph tags to "ic-ETITE'28".
-2. Header nav: Home, Conference (dropdown: Authors, Registrations, Speakers, Committee, Sponsorships, ic-ETITE'24, ic-ETITE'20), Technext'28, Visa, Contact, and the BOLT logo linking to `/bolt`.
-3. Add a new route `/icetite24` using the 2024 highlights (Appendix A), modelled on the existing `/icetite20` page.
-4. Footer: update the address, the email, and the social links. Keep the existing Instagram and Facebook links only if they are still valid; otherwise add `TODO:` placeholders.
-5. Add a small "Important dates" strip on every page (or the home page only, if that matches the existing design).
-6. Keep the site responsive at 360px, 768px and 1280px widths.
-
----
-
 ## Step 5: Authors and Registrations pages
 
-**`/authors`**
-- Paper submission link (EasyChair) as the primary call to action.
-- Submission rules, including the plagiarism check and the formatting restrictions.
-- The 2024 site linked to an IEEE final template, PDF eXpress guidelines and the IEEE copyright eCF. Keep these links only if they are valid for 2028. Otherwise leave `TODO:` placeholders.
+**`authors.html`**
+- The paper submission button (EasyChair) is the main call to action.
+- Submission rules, including the plagiarism check and manuscript restrictions.
+- The 2024 site linked an IEEE final template, PDF eXpress guidelines and the IEEE copyright eCF. Keep those links only if still valid for 2028; otherwise leave `TODO:` placeholders.
 - Note that extended versions of selected papers will be recommended to Scopus-indexed journals with impact factor.
-- Render the **Important Dates** table:
+- Important Dates table (rendered from `data/dates.js`).
+- Topics in four groups (Information Technology, Communication Engineering, Computer Engineering, Electronics Engineering) from `data/topics.js`. Use `<details>` elements or a multi-column layout so the page is not one long list.
 
-| Milestone | Date |
-|---|---|
-| Full paper submission | 05 October 2027 (see Step 9) |
-| Notification of acceptance | 04 November 2027 |
-| Camera-ready paper with registration | 12 December 2027 |
-| Conference | 10-11 February 2028 |
-
-- Render **Topics** in four groups (Information Technology, Communication Engineering, Computer Engineering, Electronics Engineering) using the lists in Appendix A. Use a collapsible or multi-column layout so the page does not become one very long list.
-
-**`/registrations`**
-- Render the fee table from Appendix A with columns Category, Indian Authors and Delegates (INR), Foreign Authors and Delegates (USD).
-- Add a note that IEEE-member rates require the member number to be shown.
-- If the repo has registration links or payment instructions, keep them. Do not invent payment details. Add `TODO:` for missing ones.
+**`registrations.html`**
+- Fee table from `data/fees.js` with columns Category, Indian Authors and Delegates (INR), Foreign Authors and Delegates (USD).
+- Note that IEEE-member rates need a valid member number.
+- Keep any existing registration or payment links. Do not invent payment details. Add `TODO:` for missing ones.
 
 ---
 
-## Step 6: Committee page (`/committee`)
+## Step 6: Committee page (`committee.html`)
 
-Build this from data, not hand-written JSX.
-
-1. Create `data/committee.js` with one array per group: Chief Patron, Patrons, Organizing Chair, Organizing Co-chair, Conference Chair, Publication Chair, Publication Co-chairs, Finance Chair, Finance Co-chair, Technical Programme Chairs, Publication Committee, Sponsorship Committee, Publicity and Media Committee, Registration Committee, BOLT 3.0 Hackathon, Technext'28 Expo Committee, Event Management Committee, Guest Care Committee, Conference Coordinating Committee, Executive Advisory Committee, International Advisory Committee, National Advisory Committee, Technical Committee.
-2. Each person: `{ name, role, affiliation }`.
-3. Use Appendix A as the source, but **deduplicate** (Step 9 lists the known repeats).
-4. UI: group headings, a responsive card or list grid, and an optional client-side search box.
-5. Show a "Contact" block near the top with the Conference Chair, Publication Chair and Finance Chair (names, emails, phone numbers from Appendix A).
+1. Render every group from `data/committee.js`: Chief Patron, Patrons, Organizing Chair, Organizing Co-chair, Conference Chair, Publication Chair and Co-chairs, Finance Chair and Co-chair, Technical Programme Chairs, Publication, Sponsorship, Publicity and Media, Registration, BOLT 3.0 Hackathon, Technext'28 Expo, Event Management, Guest Care, Conference Coordinating, Executive Advisory, International Advisory, National Advisory, Technical Committee.
+2. **Deduplicate** using the list in Step 9.
+3. Layout: group headings with a responsive CSS grid of cards or a clean list. Add a small vanilla-JS search box that filters names.
+4. Show a contact block at the top for the Conference Chair, Publication Chair and Finance Chair from `data/contacts.js`.
 
 ---
 
 ## Step 7: Remaining pages
 
-- **`/speakers`:** no 2028 speakers are named in the source. Show a "Speakers to be announced" state. Keep the 2024 layout so it can be filled from `data/speakers.js` later.
-- **`/sponsorship`:** keep the existing structure. Add a `TODO:` for the 2028 sponsorship brochure. Optionally list 2024 partners (Intel, Cisco, Yellow.ai, Java Capital, Seed VC Innovation) under "Previous sponsors".
-- **`/bolt`:** rebrand to BOLT 3.0 and list the coordinators from the source (Dr. J. Karthikeyan, Dr. Brijendra Singh, Dr. Krishnamoorthy N.). Keep 2024 stats (683 registrations for BOLT 2.0) as history. Do not invent 2028 prize or schedule details.
-- **`/technext`:** create a simple page for Technext'28 (industrial expo and project competition). List the Expo committee from the source. Keep it minimal if there is no other information.
-- **`/visa`:** keep the existing content. Do not link the 2024 NOC document. Add a `TODO:` for a 2028 one.
-- **`/contact`:** email `icetiteconference@vit.ac.in`, the three chair contacts, and the address.
-- **`/icetite20`:** leave as is, apart from fixing broken links.
+- **`speakers.html`:** no 2028 speakers are named in the source, so show "Speakers to be announced". Keep the 2024 layout and make it data-driven from `data/speakers.js` (empty array for now).
+- **`sponsorship.html`:** keep the structure. Add a `TODO:` for the 2028 sponsorship brochure. Optionally list Intel, Cisco, Yellow.ai, Java Capital and Seed VC Innovation under "Previous sponsors".
+- **`bolt.html`:** rebrand to BOLT 3.0 and list the coordinators (Dr. J. Karthikeyan, Dr. Brijendra Singh, Dr. Krishnamoorthy N). Keep BOLT 2.0 stats (683 registrations) as history. Do not invent 2028 prizes or dates.
+- **`technext.html`:** new simple page for Technext'28 (industrial expo and project competition) listing the Expo committee. Keep it minimal.
+- **`icetite24.html`:** new page built from the 2024 highlights (Appendix A), modelled on the existing `icetite20.html`.
+- **`visa.html`:** keep the content. Do not link the 2024 NOC file. Add a `TODO:` for a 2028 one.
+- **`contact.html`:** email, the three chair contacts, and the address.
+- **`icetite20.html`:** leave as is, apart from fixing broken links.
 
 ---
 
 ## Step 8: Quality pass
 
-1. **Accessibility:** every image has alt text, headings are in order, links are distinguishable, colour contrast is at least WCAG AA, and the dropdown menu works with a keyboard.
-2. **SEO:** per-page titles and descriptions, `sitemap.xml`, `robots.txt`, canonical URLs.
-3. **Performance:** use `next/image` with sizes, lazy-load below-the-fold images, and compress anything over 300 KB.
-4. **Links:** run a link check. Every external link must resolve. List failures in the final report.
-5. **Search for stale content:** `grep -ri "2024\|cmt3\|SITE\b"` and confirm each remaining hit is intentional.
-6. **Lint and types:** run lint (and `tsc` if TypeScript is used) with zero errors.
+1. **Responsive:** check 360px, 768px and 1280px widths. No horizontal scrolling. Tables scroll inside a wrapper on small screens.
+2. **Accessibility:** alt text on all images, correct heading order, visible focus states, WCAG AA colour contrast, keyboard-usable menu.
+3. **SEO:** unique `<title>` and meta description per page, `sitemap.xml`, `robots.txt`, favicon.
+4. **Performance:** compress images over 300 KB, add `loading="lazy"` to images below the fold, set `width` and `height` on images, and remove unused CSS and JS.
+5. **Links:** check every internal link and image path. List any broken external links in the report.
+6. **Stale content:** search again for `2024`, `cmt3`, `SITE`, `Expo'24` and confirm each remaining hit is intentional.
+7. **Validation:** the HTML should pass the W3C validator with no errors.
 
 ---
 
 ## Step 9: Data problems in the source PDF (resolve, do not copy blindly)
 
-Handle these explicitly and list your decisions in the final report:
+List your decisions for each in the final report:
 
-1. **Submission date typo:** the PDF says "05 October 207" and other dates say 2027. Use **05 October 2027** and flag it for the organisers to confirm. Today (28 Sep 2026) is more than a year before that, so double-check that this is not meant to be a 2026 or a later 2027 date.
-2. **Edition numbering:** the page title says "Third", the highlights sections say "Second ic-ETITE'24" and "First ic-ETITE'20". This is consistent, so use "Third" for 2028.
-3. **Publication Chair inconsistency:** the contact table says Dr. Vijayan R is an Associate Professor, and the committee list says Professor, SITE. Use one value and flag it.
-4. **Duplicate entries in the International Advisory Committee:** Raija Halonen, Victor Chang, Hector Jose Garcia-Ramirez, Mahasweta Sarakar, Mahesh Banavar, Seamus Ross, Hemin Barzan Abdalla, Deepak Puthal, Suvendu Mohapatra, Li Zhang, Carl Gustaf Jansson, Olabiyisi, Subbu Kumarappan, Antonella Tucci, Niket Tandon, Sathish Gopalakrishnan, Sujatha Krishnamoorthy, Rajinikumar Ramalingam, Chockalingam Letchumanan, Adhavan Ramasamy and V. Murugesh all appear twice. Keep one entry each.
-5. **Duplicate entries in the National Advisory Committee:** P. Sakthivel, P. Subramanian, H. R. Mohan, K. V. S. Hari, S. V. Kulkarni, Arun D (Mahindrakar), Pabitra Mitra, Rajat Subhra Chakraborty, Dhiman Mallick, Nandakumar Nambath, Subhananda Chakrabarti, Chandan Kumar Sarkar, M. Nabi, Sougata Mukherjea and Shabbir Merchant are repeated. Keep one entry each and use the fuller version of the name and title.
-6. **Possible affiliation error:** "Dr. M. P. Rajan, Indian Institute of Information Technology, Kottayam, Delhi". Flag it. Do not guess the correction.
-7. **Other typos to fix without changing meaning:** "ViceChancellors" (Vice-Chancellors), "ACMMadras" (ACM Madras), "Dr.V.Murugesh" spacing, "Rs. 1,00, 000" (Rs. 1,00,000), "Sarakar" (confirm spelling), "Computation Intelligence" (probably "Computational Intelligence"; confirm).
-8. **Rank claims:** copy the QS, ARWU and NIRF figures exactly as given in Appendix A. Do not update or embellish them.
+1. **Submission date typo:** the PDF says "05 October 207" while the other dates are 2027. Use **05 October 2027** and flag it for the organisers to confirm.
+2. **Publication Chair inconsistency:** Dr. Vijayan R is "Associate Professor" in the contact table and "Professor, SITE" in the committee list. Use one value and flag it.
+3. **International Advisory Committee duplicates:** Raija Halonen, Victor Chang, Hector Jose Garcia-Ramirez, Mahasweta Sarakar, Mahesh Banavar, Seamus Ross, Hemin Barzan Abdalla, Deepak Puthal, Suvendu Mohapatra, Li Zhang, Carl Gustaf Jansson, Olabiyisi, Subbu Kumarappan, Antonella Tucci, Niket Tandon, Sathish Gopalakrishnan, Sujatha Krishnamoorthy, Rajinikumar Ramalingam, Chockalingam Letchumanan, Adhavan Ramasamy and V. Murugesh each appear twice. Keep one entry each.
+4. **National Advisory Committee duplicates:** P. Sakthivel, P. Subramanian, H. R. Mohan, K. V. S. Hari, S. V. Kulkarni, Arun D (Mahindrakar), Pabitra Mitra, Rajat Subhra Chakraborty, Dhiman Mallick, Nandakumar Nambath, Subhananda Chakrabarti, Chandan Kumar Sarkar, M. Nabi, Sougata Mukherjea and Shabbir Merchant are repeated. Keep one entry each, using the fuller name and title.
+5. **Possible affiliation error:** "Dr. M. P. Rajan, Indian Institute of Information Technology, Kottayam, Delhi". Flag it and do not guess.
+6. **Typos to fix without changing meaning:** "ViceChancellors" (Vice-Chancellors), "ACMMadras" (ACM Madras), "Dr.V.Murugesh" spacing, "Rs. 1,00, 000" (Rs. 1,00,000). Confirm "Sarakar" and "Computation Intelligence" with the organisers.
+7. **Rank claims:** copy the QS, ARWU and NIRF figures exactly as given in Appendix A.
 
 ---
 
 ## Step 10: Deployment and handover
 
-1. Confirm `npm run build` and `npm start` work.
-2. Deploy a Vercel preview and share the URL.
-3. Write `README.md` covering: how to run the site, where to edit dates, fees and committees, how to add speakers, and how to deploy.
-4. Write the final report: what changed per step, all `TODO:` items, all flagged data issues from Step 9, and any broken links.
+1. Test every page once more from a local server.
+2. Deploy as a static site (Vercel, Netlify or GitHub Pages) and share the preview URL. No build command is needed; the publish directory is the repo root (or the folder that holds `index.html`).
+3. Write or update `README.md`: folder structure, how to edit dates, fees, committees and speakers in `data/`, how to add a new page, and how to deploy.
+4. Write the final report: what changed per step, all `TODO:` items, all flagged issues from Step 9, and any broken links.
 
-**Definition of done:** the build passes, the preview is live, there is no unintended 2024 content, and every `TODO:` is listed in the report.
+**Definition of done:** every page works on mobile and desktop, there is no unintended 2024 content, the preview site is live, and every `TODO:` is listed in the report.
 
 ---
 
@@ -433,13 +428,16 @@ A student chapter that explores advances in information theory and applies them 
 
 ---
 
+
+---
+
 # Appendix B: Reference site notes (from https://icetite.vercel.app/)
 
-- Next.js pages-router app using `next/image` and hashed static media (e.g. `icetite.*.png`, `bolt.*.svg`, `downarrow.*.svg`).
-- Header: ic-ETITE logo, BOLT logo linking to `/bolt`, and nav items Home, Conference (dropdown), Expo'24, Visa, Contact. IEEE Madras and VIT logos appear in the top bar.
+- Header: ic-ETITE logo, BOLT logo linking to the BOLT page, nav items Home, Conference (dropdown), Expo'24, Visa, Contact. IEEE Madras and VIT logos sit in the top bar.
 - Conference dropdown: Authors, Registrations, Speakers, Committee, Sponsorships, ic-ETITE'20.
 - Home hero: full-width VIT background image, title, subtitle, "Technically co-sponsored by IEEE Madras Section", date and venue, Download Brochure button.
 - Below the hero: a paper submission button plus a link list (final paper template, general information for registered authors, presentation instructions, IEEE PDF eXpress, IEEE copyright eCF, camera-ready submission, registration links for Indian and foreign authors).
 - Content sections alternate text and image: About, Theme, Highlights of previous edition, About VIT, Ranking & Accreditation, About the School, About IEEE Information Theory Society.
 - Footer: Technical Co-sponsor logo (IEEE Madras), Supported By logos (ACM, IEEE ITS, IEEE CS, IEEE Madras), social icons (Instagram, LinkedIn, Facebook, email), address, and brochure and NOC download buttons.
-- The existing 2024 links (CMT submission, Google Drive brochures, NOC) are **2024-specific**. Do not reuse them for 2028.
+- The reference site is built with a framework, but this repo is plain HTML/CSS. Copy the look and layout only, not the technology.
+- The existing 2024 links (CMT submission, Google Drive brochures, NOC) are 2024-specific. Do not reuse them for 2028.
