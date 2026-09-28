@@ -17,178 +17,217 @@
 <div id="site-header"></div><noscript><nav class="noscript-nav" aria-label="Primary navigation"><a href="index.html">Home</a> <a href="about.html">About</a> <a href="committees.html">Committees</a> <a href="call-for-papers.html">Call for Papers</a> <a href="important-dates.html">Dates</a> <a href="registration.html">Registration</a> <a href="visa.html">Visa</a> <a href="events.html">Events</a> <a href="contact.html">Contact</a> <a href="advisory.html">Advisory Board</a> <a href="venue.html">Venue</a></nav></noscript>
 
 <header class="hero" id="top">
-  <img class="hero-video" src="assets/VIT.jpeg" alt="VIT Vellore campus" />
+  <video class="hero-video" id="heroVideo" muted loop playsinline preload="metadata" poster="assets/VIT.jpeg" aria-hidden="true">
+    <source data-src="assets/Video/videoplayback-2abc.mp4" type="video/mp4">
+  </video>
 
   <div class="wrap hero-grid">
     <div>
-      <h1>Welcome to ic-ETITE&rsquo;28</h1>
+      <h1>Welcome to ic-ETITE&rsquo;28!</h1>
       <p class="lead">The Third IEEE International Conference on Emerging Trends in Information Technology and Engineering (ic-ETITE&rsquo;28)</p>
 
       <div class="hero-sponsor">
-        <span>Officially co-sponsored by</span>
-        <strong>IEEE Madras Section</strong>
-        <span>Supported by ACM India Council</span>
+        <span>Organized by <span data-conference-organiser></span></span>
+        <strong>Technically co-sponsored by IEEE Madras Section</strong>
       </div>
 
-      <div class="hero-date">February 10&ndash;11, 2028 at VIT Vellore, India</div>
+      <div class="hero-date"><strong data-conference-dates></strong> at Vellore Institute of Technology (VIT), Vellore, India</div>
 
       <div class="hero-actions">
-        <a href="https://icetite.vit.ac.in/docs/ic-ETITE_24.pdf" class="btn-solid" target="_blank" rel="noopener">Download Brochure</a>
-        <a href="https://technext.vit.ac.in/booth-enquiry" class="btn-outline" target="_blank" rel="noopener">Book a Stall</a>
-        <a href="https://icetite-web.vercel.app/docs/instructions.pdf" class="btn-outline" target="_blank" rel="noopener">Presentation Guidelines</a>
+        <a href="call-for-papers.html#submit" class="btn-solid">Call for Papers</a>
+        <!-- TODO: Add the official 2028 brochure when organizers provide it. -->
+        <button type="button" class="btn-outline brochure-disabled" disabled aria-describedby="brochure-status">Download Brochure</button>
+        <a href="technext.html" class="btn-outline">Book a Stall</a>
+        <a href="call-for-papers.html#presentation" class="btn-outline">Presentation Guidelines</a>
       </div>
+      <p class="hero-todo" id="brochure-status">TODO: The 2028 brochure is not available yet.</p>
     </div>
-
   </div>
 </header>
 
-<div class="marquee-section">
-  <div class="wrap" style="overflow:hidden;">
-    <div class="marquee-track" id="marqueeTrack"></div>
-  </div>
-</div>
-
-<section class="quick-links-section" aria-label="Conference quick links">
-  <div class="wrap">
-    <div class="hero-links">
-      <a href="https://cmt3.research.microsoft.com/User/Login?ReturnUrl=%2FicETITE2024" target="_blank" rel="noopener">Paper Submission</a>
-      <a href="registration.html">Registration for Indian Authors/Participants</a>
-      <a href="registration.html">Registration for Foreign Authors/Participants</a>
-      <a href="venue.html">Hotels</a>
-      <a href="https://icetite.vit.ac.in/docs/ic-ETITE_24.pdf" target="_blank" rel="noopener">Accommodation Brochure</a>
-      <a href="call-for-papers.html">IEEE ic-ETITE Final Paper Template</a>
-      <a href="keynote-speakers.html">Speakers</a>
-      <a href="https://icetite.vit.ac.in/docs/PDF_eXpress_help_manual.pdf" target="_blank" rel="noopener">Guidelines for IEEE PDF eXpress</a>
-      <a href="icetite20.html#bolt">BOLT 2.0</a>
-      <a href="https://technext.vit.ac.in/booth-enquiry" target="_blank" rel="noopener">TECHNEXT 24</a>
-    </div>
-  </div>
-</section>
-
 <main>
-<section class="about-section" id="about">
-  <div class="wrap about-grid">
-    <div class="copy">
-      <div class="section-tag">About the conference</div>
-      <h2>About IC-ETITE</h2>
-      <p>The conference exists to strengthen research across Information Technology, Computer Engineering, Communication Engineering and Electronics, giving researchers, academicians, engineers, industry professionals and students a shared international platform.</p>
-      <p>Beyond publication, the goal is connection: helping delegates build research and business relationships that carry into future collaborations across their careers. Original, unpublished work is welcomed from every relevant subject area.</p>
-      <p>Papers accepted and presented are taken forward for indexing in IEEE Xplore, extending each author's work to a global technical audience.</p>
-    </div>
-    <div class="about-visual diagonal-panel">
-      <div class="stat-float"><div class="big">40+</div><div class="cap">countries represented in past editions</div></div>
-    </div>
+<section class="badge-strip" id="badges" aria-label="Conference credentials">
+  <div class="wrap badge-grid">
+    <div class="credential"><span class="credential-label">Organized by</span><strong>SCORE · VIT Vellore</strong></div>
+    <div class="credential credential-with-logo"><img src="assets/images/ieee-its-circle-logo.jpg" alt="IEEE Information Theory Society emblem" width="96" height="90"><span><span class="credential-label">Student chapter</span><strong>IEEE ITS VIT</strong></span></div>
+    <div class="credential"><span class="credential-label">Accreditation</span><strong>NAAC A++ · CGPA 3.66 / 4</strong></div>
+    <div class="credential"><span class="credential-label">NIRF 2025</span><strong>14th University · 14th Research · 16th Engineering</strong></div>
   </div>
 </section>
 
-<section class="alt-bg about-section" id="theme">
-  <div class="wrap about-grid">
-    <div class="about-visual diagonal-panel" style="order:2;">
-      <div class="stat-float"><div class="big">4</div><div class="cap">core engineering &amp; technology tracks</div></div>
-    </div>
-    <div class="copy" style="order:1;">
-      <div class="section-tag">Conference theme</div>
-      <h2>Theme of the Conference</h2>
-      <p>ic-ETITE places a deliberate focus on advancing Information Technology and Engineering research, offering a worldwide stage for innovators to present work that moves the field forward.</p>
-      <p>The underlying mission is to promote development that is both rigorous and connected &mdash; helping researchers find collaborators beyond their own institutions and borders, and giving early findings a clear path toward real academic impact.</p>
-    </div>
+<section class="key-facts-section" aria-label="Conference facts">
+  <div class="wrap key-facts-grid">
+    <article class="key-fact"><strong data-conference-dates-short></strong><span>Conference dates</span></article>
+    <article class="key-fact"><strong>VIT Vellore</strong><span>Host campus &amp; venue</span></article>
+    <article class="key-fact"><strong>Peer-reviewed</strong><span>Conference tracks</span></article>
+    <article class="key-fact"><strong>NAAC A++</strong><span>NIRF 2025: #14 University · #16 Engineering</span></article>
   </div>
 </section>
 
-<section id="highlights">
+<section id="about" class="home-story-section">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-tag">Looking back</div>
-      <h2>Highlights of the previous edition</h2>
-      <p>ic-ETITE'20 brought together technical sessions, keynotes and a flagship hackathon, with proceedings indexed in IEEE Xplore.</p>
+      <div class="section-tag">International research forum</div>
+      <h2>About ic-ETITE’28</h2>
+      <p>The Third IEEE International Conference on Emerging Trends in Information Technology and Engineering will be held at VIT Vellore on 10–11 February 2028.</p>
     </div>
-    <div class="stat-strip" style="margin-bottom:32px;">
-      <div class="cell"><div class="num">21</div><div class="cap">Technical sessions</div></div>
-      <div class="cell"><div class="num">17</div><div class="cap">Keynote sessions</div></div>
-      <div class="cell"><div class="num">500+</div><div class="cap">Hackathon participants</div></div>
-      <div class="cell"><div class="num">&#8377;1L</div><div class="cap">BOLT prize money</div></div>
+    <div class="home-editorial-grid">
+      <div class="home-copy">
+        <p>ic-ETITE’28 provides an international platform for researchers, academicians, engineers, industry professionals, and students to present and exchange research across Information Technology, Computer Engineering, Communication Engineering, Electronics Engineering, and related areas.</p>
+        <p>The conference fosters knowledge sharing, interdisciplinary collaboration, industry–academia interaction, and future research partnerships. Original, unpublished research papers are invited.</p>
+      </div>
+      <div class="photo-pair">
+        <figure><img src="assets/images/conference-dais.jpg" alt="Dignitaries releasing conference proceedings at an ic-ETITE conference" width="828" height="552" loading="lazy"><figcaption>Conference proceedings release</figcaption></figure>
+        <figure><img src="assets/images/conference-auditorium.jpg" alt="Conference delegates gathered in an auditorium at VIT Vellore" width="828" height="552" loading="lazy"><figcaption>Conference delegates at VIT Vellore</figcaption></figure>
+      </div>
     </div>
-    <a href="icetite20.html" class="btn-dark-outline">View the full ic-ETITE'20 recap</a>
   </div>
 </section>
 
-<section class="alt-bg" id="host">
+<section class="alt-bg home-theme-section" id="theme">
+  <div class="wrap home-theme-grid">
+    <div>
+      <div class="section-tag">Research, innovation, collaboration</div>
+      <h2>The theme of the Conference</h2>
+      <p>ic-ETITE’28 emphasizes advancing research and innovation in Information Technology and Engineering. It provides a global platform to showcase ideas, exchange knowledge, and explore emerging developments in science and technology.</p>
+      <p>The conference encourages international collaboration, interdisciplinary research, and global research networks that support future joint initiatives and academic partnerships.</p>
+    </div>
+    <div class="theme-mark" aria-label="Four engineering and technology domains"><span>IT</span><span>CE</span><span>Comms</span><span>EE</span></div>
+  </div>
+</section>
+
+<section id="host" class="home-story-section">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-tag">The host institution</div>
-      <h2>About VIT Vellore</h2>
-      <p>ic-ETITE is hosted at Vellore Institute of Technology, home to the School of Computer Science Engineering and Information Systems.</p>
+      <div class="section-tag">Host university · Established 1984</div>
+      <h2>About VIT</h2>
     </div>
-
-    <div class="host-tabs" role="tablist">
-      <button class="active" data-tab="vit">VIT</button>
-      <button data-tab="score">SCORE</button>
-      <button data-tab="its">IEEE Info Theory Society</button>
-      <button data-tab="rank">Rankings</button>
-    </div>
-
-    <div class="host-panel active" data-panel="vit">
-      <p>Vellore Institute of Technology was founded in 1984 as Vellore Engineering College and was granted university status in 2001. It is led by founder-chancellor Dr. G. Viswanathan and today draws students and faculty from around the world.</p>
-      <p>The institute is built around a consistent focus on improving higher-education quality, with a strong support structure that carries students through their time on campus, guided by its mission of transforming lives through education and research.</p>
-    </div>
-    <div class="host-panel" data-panel="score">
-      <p>SCORE &mdash; formerly SITE &mdash; runs B.Tech (IT), M.Tech (Software Engineering), MCA, BCA, B.Sc (Computer Science), M.Tech by Research and Ph.D programmes in Information Technology and Engineering.</p>
-      <p>The school has more than 5,900 students and 188 faculty members, backed by state-of-the-art labs, strong industry linkages, and a long track record of hosting seminars, workshops and conferences in emerging technical areas.</p>
-    </div>
-    <div class="host-panel" data-panel="its">
-      <p>The IEEE Information Theory Society student chapter at VIT is a newer chapter focused on exploring current advances in information theory and applying them to real problems.</p>
-      <p>It runs technical events and workshops and partners with collaborators on applied projects, aiming to help students build confidence tackling open technical challenges.</p>
-    </div>
-    <div class="host-panel" data-panel="rank">
-      <ul class="rank-list">
-        <li>Engineering &amp; Technology ranked 240th globally and 9th in India, with eight subjects in the global top 500 (QS World University Rankings by Subject 2023)</li>
-        <li>Computer Science &amp; Information Systems ranked 201&ndash;250 globally and 7th in India (QS World University Rankings by Subject 2023)</li>
-        <li>8th best university and 11th best engineering institution in India (NIRF Ranking, Govt. of India 2023)</li>
-        <li>173rd best institution in Asia (QS Asia University Rankings 2023)</li>
-        <li>Top 601&ndash;700 globally and among the top 3 in India (Shanghai ARWU Ranking 2022)</li>
-        <li>NAAC accredited with an A++ grade (3.66 / 4)</li>
-      </ul>
+    <div class="home-editorial-grid home-editorial-reverse">
+      <div class="home-copy">
+        <p>Vellore Institute of Technology (VIT) was established in 1984 as Vellore Engineering College and was granted university status by the Government of India in 2001 under Section 3 of the UGC Act, 1956. Founded by Dr. G. Viswanathan, VIT is committed to quality higher education, research, and innovation.</p>
+        <p>VIT promotes an international academic environment through research, global collaborations, student and faculty exchanges, and joint research. Its vision is “Transforming life through excellence in education and research.”</p>
+        <a class="text-link" href="https://vit.ac.in/" target="_blank" rel="noopener">Visit VIT official website</a>
+        <ul class="rank-list home-rank-list">
+          <li>QS World University Rankings by Subject 2026: 119th globally in Engineering &amp; Technology; 86th in Computer Science &amp; Information Systems; 87th in Electrical &amp; Electronic Engineering; several disciplines in the global top 200.</li>
+          <li>QS Sustainability Rankings 2026: 352nd globally, 7th among Indian institutions.</li>
+          <li>Shanghai Ranking (ARWU) 2025: 501–600 band globally, 1–2 band among Indian institutions.</li>
+          <li>NAAC A++ grade, CGPA 3.66 / 4; NIRF 2025: 14th University, 14th Research, 16th Engineering.</li>
+        </ul>
+      </div>
+      <div class="photo-pair">
+        <figure><img src="assets/images/vit-campus.jpg" alt="Vellore Institute of Technology campus landmark" width="828" height="371" loading="lazy"><figcaption>VIT Vellore campus</figcaption></figure>
+        <figure><img src="assets/images/score-labs.jpg" alt="Silver Jubilee Tower and computing laboratories at SCORE, VIT Vellore" width="828" height="371" loading="lazy"><figcaption>Silver Jubilee Tower and computing laboratories</figcaption></figure>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
+<section class="alt-bg home-story-section" id="score">
+  <div class="wrap home-partner-grid">
+    <div>
+      <div class="section-tag">Organizing school</div>
+      <h2>About SCORE</h2>
+      <p>The School of Computer Science Engineering and Information Systems (SCORE) at VIT Vellore covers Computer Science, Information Technology, Artificial Intelligence, Data Engineering, Cyber Security, Software Engineering, and Computer Applications.</p>
+      <p>Programmes include B.Tech. IT; B.Tech. CSE (AI and Data Engineering); B.Tech. CSE (Cyber Security); BCA; B.Sc. Computer Science; M.Tech. CSE (Cybersecurity); M.Tech. Software Engineering; MCA; M.Sc. AI and Machine Learning; M.Tech. by Research; and Ph.D.</p>
+      <p>Its programmes span undergraduate, postgraduate, research, and doctoral study. SCORE emphasizes interdisciplinary research, industry collaboration, consultancy, industry-supported laboratories, Centres of Excellence, seminars, workshops, expert talks, symposia, and conferences.</p>
+      <a class="text-link" href="https://vit.ac.in/schools/school-of-computer-science-engineering-and-information-systems" target="_blank" rel="noopener">Visit SCORE official school portal</a>
+    </div>
+    <img class="score-seal" src="assets/images/score-seal.svg" alt="VIT School of Computer Science Engineering and Information Systems (SCORE) seal" width="220" height="220" loading="lazy">
+  </div>
+</section>
+
+<section id="ieee-its" class="home-story-section">
+  <div class="wrap home-partner-grid">
+    <div>
+      <div class="section-tag">Technical student body · VIT Vellore Chapter</div>
+      <h2>About IEEE Information Theory Society, VIT</h2>
+      <p>The IEEE Information Theory Society at VIT explores advances in information theory and applies them to current technological challenges. The student chapter organizes technical events, workshops, and seminars, and collaborates with academia and industry to help students build innovative solutions and technical expertise.</p>
+      <a class="text-link" href="https://ieee-its-1-tzbd.vercel.app/" target="_blank" rel="noopener">Visit IEEE ITS chapter website</a>
+    </div>
+    <figure class="single-photo"><img src="assets/images/ieee-its-workshop.jpg" alt="IEEE Information Theory Society technical symposium session" width="828" height="462" loading="lazy"><figcaption>IEEE ITS technical symposium</figcaption></figure>
+  </div>
+</section>
+
+<section class="alt-bg" id="highlights">
   <div class="wrap">
-    <div class="info-card">
+    <div class="section-head">
+      <div class="section-tag">Conference heritage &amp; track record</div>
+      <h2>Previous Editions: ic-ETITE’20 &amp; ic-ETITE’24</h2>
+      <p>Research sessions, IEEE Xplore proceedings, international participation, and student hackathons across earlier editions.</p>
+    </div>
+    <div id="previous-editions"></div>
+    <a href="about.html#highlights" class="btn-dark-outline">Explore complete conference history</a>
+  </div>
+</section>
+
+<section class="home-sponsors-section" id="sponsors">
+  <div class="wrap sponsor-overview">
+    <div class="sponsor-overview-item">
+      <span class="sponsor-overline">Technical co-sponsor</span>
+      <strong>IEEE Madras Section</strong>
+      <small class="sponsor-asset-todo">TODO: Approved IEEE Madras Section logo asset is not available.</small>
+      <span>Supported by <span data-conference-supported-by></span></span>
+    </div>
+    <div class="sponsor-overview-item sponsor-school">
+      <img src="assets/images/score-seal.svg" alt="SCORE, VIT Vellore" width="76" height="76" loading="lazy">
+      <span><span class="sponsor-overline">Organizing school</span><strong>SCORE · VIT Vellore</strong></span>
+    </div>
+  </div>
+</section>
+
+<section class="scopus-note" aria-label="Publication information">
+  <div class="wrap"><span class="section-tag">Scopus publication</span><p>Extended version of selected papers will be recommended for publication in Scopus indexed journals with impact factor.</p></div>
+</section>
+
+<section class="alt-bg" id="call-for-papers">
+  <div class="wrap">
+    <div class="info-card home-cfp-card">
       <div>
-        <h3>Manuscript submission</h3>
-        <p>Papers are submitted through the conference's Microsoft CMT portal and go through a plagiarism check on receipt. Manuscripts should be free of embedded links, scanned images, headers and footers &mdash; submissions by email are not accepted.</p>
-        <div class="hero-actions" style="margin-top:24px;">
-          <a href="call-for-papers.html" class="btn-solid">Author Guidelines</a>
-          <a href="https://cmt3.research.microsoft.com/User/Login?ReturnUrl=%2FicETITE2024" class="btn-outline" target="_blank" rel="noopener">Submit a Paper</a>
+        <div class="section-tag">Original research</div>
+        <h2>Call for Papers &amp; Original Research</h2>
+        <p>Original and unpublished research addressing emerging challenges and recent developments is invited across Information Technology, Computer Engineering, Communication Engineering, and Electronics Engineering.</p>
+        <div class="home-inline-actions">
+          <a href="call-for-papers.html#submit" class="btn-solid">Submit on EasyChair</a>
+          <a href="call-for-papers.html" class="btn-dark-outline">Author Guidelines</a>
         </div>
+        <p class="form-note">Conference inquiries: <a href="mailto:icetiteconference@vit.ac.in">icetiteconference@vit.ac.in</a></p>
       </div>
-      <div class="contact-box">
-        <div class="row"><span>Queries</span><span>icetiteconference@vit.ac.in</span></div>
-        <div class="row"><span>Scope</span><span>IT &amp; Engineering, open topics</span></div>
-        <div class="row"><span>Indexing</span><span>IEEE Xplore</span></div>
-        <div class="row"><span>Review</span><span>Plagiarism-checked</span></div>
+      <div class="submission-rules">
+        <h3>Submission compliance</h3>
+        <ul>
+          <li>Submit papers through EasyChair only.</li>
+          <li>All submissions go through a plagiarism check.</li>
+          <li>Do not include embedded links or scanned images.</li>
+          <li>Do not include headers or footers in the manuscript.</li>
+          <li>Email submissions are not accepted.</li>
+          <li>Extended versions of selected papers will be recommended to Scopus-indexed journals with impact factor.</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="alt-bg" id="sponsors">
+<section id="important-dates">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-tag">Partners</div>
-      <h2>Sponsors &amp; supporters</h2>
-      <p>ic-ETITE is made possible by its technical co-sponsor, title sponsors and a wide base of supporting organisations.</p>
+      <div class="section-tag">Key milestone timeline</div>
+      <h2>Important Dates</h2>
+      <p>Key deadlines for authors and delegates planning to attend ic-ETITE’28.</p>
     </div>
-    <div class="sponsor-row" style="margin-bottom:28px;">
-      <div class="sponsor-badge">IEEE Madras Section</div>
-      <div class="sponsor-badge">Cisco</div>
-      <div class="sponsor-badge">Intel</div>
-      <div class="sponsor-badge">ACM Madras</div>
-      <div class="sponsor-badge">IIC</div>
-      <div class="sponsor-badge">Yellow.ai</div>
+    <div id="home-important-dates"></div>
+    <a href="important-dates.html" class="btn-dark-outline">View full timeline &amp; calendar</a>
+  </div>
+</section>
+
+<section class="alt-bg keynote-teaser" id="keynotes">
+  <div class="wrap keynote-teaser-content">
+    <div>
+      <div class="section-tag">Distinguished global scientists &amp; leaders</div>
+      <h2>Keynote Speakers &amp; Luminaries</h2>
+      <p>Keynote speakers for ic-ETITE’28 will be announced by the organizers.</p>
+      <span class="keynote-status">Speakers to be announced</span>
     </div>
-    <a href="sponsorship.html" class="btn-dark-outline">View sponsorship tiers &amp; benefits</a>
+    <a href="keynote-speakers.html" class="btn-dark-outline">View keynote speakers</a>
   </div>
 </section>
 </main>
@@ -196,6 +235,9 @@
 
 <button id="backTop" aria-label="Back to top">&uarr;</button>
 <script src="data/conference.js"></script>
+<script src="data/dates.js"></script>
+<script src="data/editions.js"></script>
+<script src="js/render.js"></script>
 <script src="js/layout.js"></script>
 <script src="assets/js/main.js"></script>
 </body>

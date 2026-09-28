@@ -94,9 +94,156 @@
     if (main) main.replaceChildren(mount);
   }
 
+  function renderHomeDates() {
+    var mount = document.getElementById('home-important-dates');
+    if (!mount || !window.IMPORTANT_DATES) return;
+
+    var list = element('ol', 'home-timeline');
+    window.IMPORTANT_DATES.forEach(function (item) {
+      var row = element('li', 'home-timeline-item');
+      row.appendChild(element('strong', 'home-timeline-date', item.date));
+      row.appendChild(element('span', 'home-timeline-milestone', item.milestone));
+      if (item.note) row.appendChild(element('small', 'home-timeline-note', item.note));
+      list.appendChild(row);
+    });
+    mount.replaceChildren(list);
+  }
+
+  function renderDateTable() {
+    var mount = document.getElementById('important-dates-table');
+    if (!mount || !window.IMPORTANT_DATES) return;
+
+    var wrapper = element('div', 'table-wrap');
+    var table = element('table', 'table-custom');
+    var header = element('thead');
+    var headerRow = element('tr');
+    ['Milestone', 'Date'].forEach(function (label) {
+      var cell = element('th', '', label);
+      cell.scope = 'col';
+      headerRow.appendChild(cell);
+    });
+    header.appendChild(headerRow);
+    var body = element('tbody');
+    window.IMPORTANT_DATES.forEach(function (item) {
+      var row = element('tr');
+      row.appendChild(element('td', '', item.milestone));
+      row.appendChild(element('td', '', item.date));
+      body.appendChild(row);
+    });
+    table.appendChild(header);
+    table.appendChild(body);
+    wrapper.appendChild(table);
+
+    var content = element('div');
+    content.appendChild(wrapper);
+    if (window.IMPORTANT_DATES[0].note) {
+      content.appendChild(element('p', 'form-note', window.IMPORTANT_DATES[0].note));
+    }
+    mount.replaceChildren(content);
+  }
+
+  function renderConferenceFacts() {
+    if (!window.CONF) return;
+    document.querySelectorAll('[data-conference-organiser]').forEach(function (node) {
+      node.textContent = window.CONF.organiser;
+    });
+    document.querySelectorAll('[data-conference-dates]').forEach(function (node) {
+      node.textContent = window.CONF.dates.replace('-', '–');
+    });
+    document.querySelectorAll('[data-conference-dates-short]').forEach(function (node) {
+      node.textContent = window.CONF.dates.replace(' February ', ' Feb ').replace('-', '–');
+    });
+    document.querySelectorAll('[data-conference-supported-by]').forEach(function (node) {
+      node.textContent = window.CONF.supportedBy.join(' · ');
+    });
+  }
+
+  function renderEditionCard(edition) {
+    var card = element('article', 'edition-card');
+    var is2024 = edition.name.indexOf("'24") !== -1;
+    var imageName = is2024 ? 'icetite24-inauguration.jpg' : 'icetite20-inauguration.jpg';
+    var imageAlt = is2024
+      ? "Dignitaries and keynote luminaries at ic-ETITE'24 inaugural session"
+      : "VIT Chancellor presiding over the ic-ETITE'20 inaugural conclave";
+    var image = element('img', 'edition-image');
+    image.src = 'assets/images/' + imageName;
+    image.alt = imageAlt;
+    image.width = 828;
+    image.height = 552;
+    image.loading = 'lazy';
+    card.appendChild(image);
+
+    var body = element('div', 'edition-card-body');
+    body.appendChild(element('div', 'section-tag', edition.edition.toUpperCase() + ' EDITION  ·  ' + edition.dates));
+    body.appendChild(element('h3', '', 'Highlights of the ' + edition.edition + ' ' + edition.name));
+
+    var summary = is2024
+      ? 'Organized by SCORE, VIT Vellore; technically co-sponsored by IEEE Madras Section and supported by ACM.'
+      : 'The inaugural edition was technically co-sponsored by IEEE Computer Society Madras Chapter and IEEE Communications Society Madras Chapter, and supported by ACM Madras Chapter.';
+    body.appendChild(element('p', 'edition-summary', summary));
+
+    var stats = element('dl', 'edition-stats');
+    var metrics = is2024 ? [
+      [edition.papers, 'Papers received'],
+      [edition.countries, 'Countries'],
+      [edition.participants, 'Participants'],
+      [edition.technicalSessions, 'Technical sessions'],
+      [edition.keynoteSessions, 'Keynote sessions'],
+      [edition.boltRegistrations, 'BOLT 2.0 registrations']
+    ] : [
+      [edition.technicalSessions, 'Technical sessions'],
+      [edition.keynoteSessions, 'Keynote sessions'],
+      [edition.boltParticipants, 'Hackathon participants'],
+      [edition.boltPrize, 'BOLT prize money'],
+      [edition.presentedPapersPublishedBy, 'Presented papers published in']
+    ];
+    metrics.forEach(function (metric) {
+      var item = element('div', 'edition-stat');
+      item.appendChild(element('dt', '', String(metric[0])));
+      item.appendChild(element('dd', '', metric[1]));
+      stats.appendChild(item);
+    });
+    body.appendChild(stats);
+
+    if (is2024) {
+      body.appendChild(element('p', 'edition-detail', 'Chief Guest: ' + edition.chiefGuest));
+      body.appendChild(element('p', 'edition-detail', 'Guest of Honour: ' + edition.guestOfHonour));
+      body.appendChild(element('p', 'edition-detail', edition.technext + '.'));
+      body.appendChild(element('p', 'edition-detail', 'Industry collaborators and sponsors: ' + edition.sponsors.join(', ') + '.'));
+    } else {
+      body.appendChild(element('p', 'edition-detail', 'Electronic ISBN: ' + edition.electronicISBN + ' · USB ISBN: ' + edition.usbISBN));
+    }
+
+    var proceedings = element('a', 'text-link', 'IEEE Xplore proceedings');
+    proceedings.href = edition.proceedings;
+    proceedings.target = '_blank';
+    proceedings.rel = 'noopener';
+    body.appendChild(proceedings);
+    var historyLink = element('a', 'text-link edition-history-link', 'Read full ' + (is2024 ? '2024' : '2020') + ' details');
+    historyLink.href = 'about.html#highlights';
+    body.appendChild(historyLink);
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderHomeEditions() {
+    var mount = document.getElementById('previous-editions');
+    if (!mount || !window.EDITIONS) return;
+
+    var grid = element('div', 'edition-grid');
+    window.EDITIONS.forEach(function (edition) {
+      grid.appendChild(renderEditionCard(edition));
+    });
+    mount.replaceChildren(grid);
+  }
+
   function initialize() {
+    renderConferenceFacts();
     renderFees();
     renderCommittee();
+    renderHomeDates();
+    renderDateTable();
+    renderHomeEditions();
   }
 
   if (document.readyState === 'loading') {

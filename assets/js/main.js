@@ -112,6 +112,40 @@
     });
   }
 
+  var heroVideo = document.getElementById('heroVideo');
+  if(heroVideo){
+    var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var desktopViewport = window.matchMedia('(min-width: 768px)');
+    var videoSource = heroVideo.querySelector('source[data-src]');
+    var videoTimer;
+    var updateHeroVideo = function(){
+      var shouldPlay = window.innerWidth >= 768 && !motionPreference.matches;
+      if(!shouldPlay){
+        heroVideo.pause();
+        heroVideo.removeAttribute('autoplay');
+        if(videoSource && videoSource.hasAttribute('src')){
+          videoSource.removeAttribute('src');
+          heroVideo.load();
+        }
+        return;
+      }
+      if(videoSource && !videoSource.getAttribute('src')){
+        videoSource.setAttribute('src', videoSource.dataset.src);
+        heroVideo.load();
+      }
+      heroVideo.setAttribute('autoplay', '');
+      var playRequest = heroVideo.play();
+      if(playRequest && playRequest.catch) playRequest.catch(function(){});
+    };
+    window.addEventListener('resize', function(){
+      window.clearTimeout(videoTimer);
+      videoTimer = window.setTimeout(updateHeroVideo, 120);
+    });
+    if(motionPreference.addEventListener) motionPreference.addEventListener('change', updateHeroVideo);
+    if(desktopViewport.addEventListener) desktopViewport.addEventListener('change', updateHeroVideo);
+    updateHeroVideo();
+  }
+
   /* ---------- Footer year ---------- */
   var yearEl = document.getElementById('year');
   if(yearEl) yearEl.textContent = new Date().getFullYear();

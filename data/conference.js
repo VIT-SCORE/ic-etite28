@@ -4,7 +4,7 @@ window.CONF = {
   fullTitle: 'Third IEEE International Conference on Emerging Trends in Information Technology and Engineering',
   dates: '10-11 February 2028',
   venue: 'Vellore Institute of Technology (VIT), Vellore, India',
-  organiser: 'School of Computer Science Engineering & Information Systems (SCORE), VIT Vellore',
+  organiser: 'School of Computer Science Engineering & Information Systems (SCORE) · VIT Vellore',
   cosponsor: 'IEEE Madras Section',
   supportedBy: ['ACM India Council', 'IEEE Information Theory Society, VIT'],
   email: 'icetiteconference@vit.ac.in',

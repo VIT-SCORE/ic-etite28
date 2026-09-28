@@ -38,7 +38,7 @@
       '<div class="site-topbar"><div class="wrap">' +
         '<a class="topbar-title" href="index.html">' + conference.name + '</a>' +
         '<a class="topbar-chapter" href="https://ieee-its-1-tzbd.vercel.app/" target="_blank" rel="noopener">' +
-          '<span class="chapter-mark" aria-hidden="true">ITS</span><span>IEEE ITS VIT VELLORE</span>' +
+          '<img class="chapter-logo" src="assets/images/ieee-its-circle-logo.jpg" alt="IEEE Information Theory Society emblem"><span>IEEE ITS VIT VELLORE</span>' +
         '</a>' +
       '</div></div>' +
       '<nav class="site-nav" id="siteNav" aria-label="Main navigation"><div class="wrap">' +
