@@ -2,44 +2,53 @@
 
 ## Project Shape
 
-- Static multi-page HTML, CSS, and vanilla JavaScript; no framework, package manifest, dependency install, or build step.
-- Opens directly from disk or can be served from the repository root. Content is written into each page rather than loaded from data files.
-- The shared header and footer are copied into each HTML file, not injected by JavaScript.
+- Static multi-page HTML, CSS, and vanilla JavaScript. There is no framework, package manifest, dependency install, or build step; pages work from disk or a static host.
+- Shared header and footer are now injected by `js/layout.js` into `#site-header` and `#site-footer`. Each page includes a no-script navigation fallback.
+- Changeable conference facts are in classic-script globals under `data/`; there is no `fetch()` dependency.
 
-## Existing Pages
+## Canonical Pages
 
 | File | Current content |
 |---|---|
-| `index.html` | Home, conference overview, theme, history, VIT/SCORE/IEEE, submission, footer |
-| `authors.html` | Author guidance, dates, old submission links |
-| `registrations.html` | Fees and registration steps |
-| `speakers.html` | Keynote content |
-| `committee.html` | Organizing, advisory, and technical committee listings |
-| `sponsorship.html` | Sponsorship tiers |
-| `icetite20.html` | Historical ic-ETITE'20 content |
+| `index.html` | Home page |
+| `call-for-papers.html` | Renamed from `authors.html`; author guidance and dates |
+| `registration.html` | Renamed from `registrations.html`; fees and registration steps |
+| `committees.html` | Renamed from `committee.html`; renders organizing rosters from data |
+| `sponsorship.html` | Sponsorship information; retained outside the target sitemap |
+| `icetite20.html` | Historical ic-ETITE'20 page; retained outside the target sitemap |
 | `visa.html` | Visa information |
-| `contact.html` | Contact details and client-side email form |
-| `hotel.html` | Accommodation and travel information |
+| `venue.html` | Renamed from `hotel.html`; accommodation and travel information |
+| `keynote-speakers.html` | Renamed from `speakers.html`; keynote content |
+| `contact.html` | Contact information and client-side email form |
 
-The target sitemap at `https://ic-etite28.vercel.app/` has 16 pages. Existing files match `index.html`, `visa.html`, and `contact.html` exactly. Missing target pages are `about.html`, `committees.html`, `advisory.html`, `call-for-papers.html`, `tracks.html`, `important-dates.html`, `registration.html`, `venue.html`, `events.html`, `hackathon.html`, `technext.html`, `keynote-speakers.html`, and `team.html`. Related but differently named pages include `committee.html`, `authors.html`, `registrations.html`, `hotel.html`, and `speakers.html`. `sponsorship.html` and `icetite20.html` are extra pages outside the target sitemap. All 16 target URLs were opened and returned HTTP 200 with page headings; the deployed framework implementation is not part of this static repository.
+Redirect stubs remain at `authors.html`, `registrations.html`, `committee.html`, `hotel.html`, and `speakers.html`.
 
-## CSS, JavaScript, and Media
+## Target Sitemap Status
 
-- `assets/css/style.css`: shared palette and layout; navigation, hero, sections, cards, tables, forms, footer, responsive rules, and reduced-motion handling.
-- `assets/js/main.js`: navbar scroll behavior, mobile menu, conference dropdown, home scrollspy, partner marquee, tabs, email-copy control, back-to-top button, hero entrance animation, and client-side contact form.
-- Media inventory: `assets/12Asset 1.svg` (126,068 bytes), `assets/vit-white-logo.png` (94,971 bytes), `assets/VIT.jpeg` (171,683 bytes), and `assets/Video/videoplayback-2abc.mp4` (2,642,844 bytes).
-- No `images/` directory exists; the initial tree contains an empty `ic-ETITE24/` directory. No filenames under `assets/` contain `2020`, `2024`, `20`, or `24`.
-- Other root files: `AUDIT.md`, `STYLE.md`, `icetite28_agent_prompt_html.md`, and `writeup_updated_Sept22.pdf`.
+The live target has 16 routes. Ten canonical pages now exist; the eight requested pages deliberately deferred to later steps are `about.html`, `advisory.html`, `tracks.html`, `important-dates.html`, `events.html`, `hackathon.html`, `technext.html`, and `team.html`. Header/footer links to those not-yet-created pages are intentional for this intermediate step. The live target routes were previously checked and returned HTTP 200.
 
-## Stale and Historical Content
+## Styles, Scripts, and Data
 
-- `2024` and `cmt3`: old CMT submission links appear in `index.html` and `authors.html`. The old `ic-ETITE_24.pdf` brochure link appears in `authors.html`, `committee.html`, `contact.html`, `hotel.html`, `icetite20.html`, `index.html`, `registrations.html`, `speakers.html`, `sponsorship.html`, and `visa.html`; `index.html` also links it from the hero/resources. `index.html` links to `TECHNEXT 24`. Do not reuse these for 2028 without confirmation.
-- `2020`: historical date/content is in `icetite20.html`, with links to that page in each shared navigation. These are archive material.
-- `SITE`: occurs in the historical SCORE description on `index.html` and the repeated footer affiliation on all ten pages.
-- Exact `Expo'24` wording was not found. The broad string `24` also matches CSS measurements and SVG viewBox values, not only year references.
-- `index.html` is titled ic-ETITE '28. The other nine pages currently have ic-ETITE '26 titles, except that `icetite20.html` identifies the 2020 archive in its title.
-- Local HTML paths and images resolved in the browser. This audit did not verify external URL reachability or OCR text embedded in images.
+- `assets/css/style.css`: shared color palette, typography, layout, components, responsive rules, reduced-motion behavior, and token-based styles for the injected header/footer.
+- `assets/js/main.js`: scroll behavior, hamburger menu, homepage scrollspy, marquee, tabs, copy-email, back-to-top, hero entrance animation, and contact form.
+- `js/layout.js`: shared responsive navigation and footer, dropdown/touch/keyboard behavior, active-page indication, and footer facts from `CONF`.
+- `js/render.js`: safe DOM rendering for registration fees and organizing committee groups.
+- `data/conference.js`: `window.CONF` event identity, dates, organiser, location, links, and address.
+- `data/dates.js`, `data/fees.js`, `data/topics.js`, `data/committee.js`, `data/advisory.js`, `data/contacts.js`, `data/speakers.js`, and `data/editions.js`: their corresponding source-derived globals. The speakers array is empty because no 2028 speakers are named in the source.
+- Media: `assets/12Asset 1.svg` (126,068 bytes), `assets/vit-white-logo.png` (94,971 bytes), `assets/VIT.jpeg` (171,683 bytes), and `assets/Video/videoplayback-2abc.mp4` (2,642,844 bytes). No approved IEEE ITS emblem asset is present; the top bar currently uses a linked text mark instead.
+- `STYLE.md` documents the shared design tokens. No `images/` directory exists; `ic-ETITE24/` was empty in the initial tree.
 
-## Browser Check
+## Content Flags and Remaining Stale Text
 
-All ten current HTML pages opened directly from disk. Referenced images loaded and no missing local references were detected. The home page had no horizontal overflow at 360, 768, or 1280 px; no overflow was observed on the other pages at the checked viewport. The home page still contains known stale 2024 content/links pending the content migration.
+- Step 2 corrected the PDF submission-date typo to 05 October 2027 and records the organiser confirmation note in the data. Dr. Vijayan R's designation differs between the committee and contact sources. Dr. M. P. Rajan's affiliation still carries the PDF conflict and needs confirmation. The source spelling `Sarakar` and topic `Computation Intelligence` remain uncorrected pending organiser confirmation.
+- The injected footer uses SCORE, omits the 2024 brochure and NOC links, retains links to `sponsorship.html` and `icetite20.html`, and has the required VIT, ranking, contact, directory, and date content.
+- Old 2024 CMT submission links and the old brochure remain in the existing home/call-for-papers body content for the later content steps; `index.html` also still has the old TechNext link. They are not present in the injected header/footer.
+- 2020 event details in `icetite20.html` and references to the SITE acronym in historical affiliation/source data are intentional context. The old `ic-ETITE '26` page titles have been corrected to `ic-ETITE'28`.
+- External link reachability and embedded image text have not been exhaustively checked.
+
+## Step 2-3 Browser Checks
+
+- Fee renderer: 7 rows displayed from `data/fees.js` on `registration.html`.
+- Committee renderer: 20 groups and 79 people displayed from `data/committee.js` on `committees.html`; the previous fictional placeholder names are gone.
+- All ten canonical pages were checked at 360, 768, and 1280 px. Header and footer mounts rendered, page titles contained ic-ETITE'28, images loaded, and no horizontal overflow was observed.
+- Mobile hamburger opens and exposes its expanded state; keyboard Enter opens dropdowns. CSS/JS diagnostics and whitespace checks passed.
