@@ -47,7 +47,7 @@ Create a `data/` folder with plain JavaScript files that define global objects. 
     name: "ic-ETITE'28",
     edition: "Third",
     fullTitle: "Third IEEE International Conference on Emerging Trends in Information Technology and Engineering",
-    dates: "10-11 February 2028",
+    dates: "10–11 February 2028",
     venue: "Vellore Institute of Technology (VIT), Vellore, India",
     cosponsor: "IEEE Madras Section",
     supportedBy: ["ACM India Council", "IEEE Information Theory Society, VIT"],
@@ -80,7 +80,7 @@ Then write a small `js/render.js` with functions that build tables and lists fro
 
 Keep the hero and section order. Update:
 
-1. **Hero:** "Welcome to ic-ETITE'28", "Third International Conference on Emerging Trends in Information Technology and Engineering (ic-ETITE'28)", "Technically co-sponsored by IEEE Madras Section", "10-11 February 2028 at VIT Vellore, India".
+1. **Hero:** "Welcome to ic-ETITE'28", "Third International Conference on Emerging Trends in Information Technology and Engineering (ic-ETITE'28)", "Technically co-sponsored by IEEE Madras Section", "10–11 February 2028 at VIT Vellore, India".
 2. **Buttons:** "PAPER SUBMISSION" links to the EasyChair URL. Hide "Download Brochure" unless a 2028 brochure exists. Do not link the 2024 Google Drive file.
 3. **Sections, in order:** About ic-ETITE'28, Theme of the Conference, Highlights of the Second ic-ETITE'24, Highlights of the First ic-ETITE'20, About VIT, Ranking & Accreditation, About SCORE, About IEEE Information Theory Society VIT, Manuscript Submission, Technical Co-sponsor and Supported By logos, Social links, Address.
 4. The 2024 site says "School of Information Technology and Engineering". Replace it with the School of Computer Science Engineering and Information Systems (SCORE).
@@ -173,7 +173,7 @@ List your decisions for each in the final report:
 
 - **Name:** Third IEEE International Conference on Emerging Trends in Information Technology and Engineering (ic-ETITE'28)
 - **Sponsorship:** officially co-sponsored by IEEE Madras Section; supported by ACM India Council
-- **Dates and venue:** 10-11 February 2028, VIT Vellore, India
+- **Dates and venue:** 10–11 February 2028, VIT Vellore, India
 - **About:** an international platform for researchers, academicians, engineers, industry professionals and students to present and exchange research in Information Technology, Computer Engineering, Communication Engineering, Electronics Engineering and related areas. It aims to foster knowledge sharing, interdisciplinary collaboration, industry-academia interaction and future research partnerships. Original, unpublished papers are invited.
 - **Theme:** advancing research and innovation in Information Technology and Engineering, fostering international collaboration, interdisciplinary research and global research networks for joint initiatives and academic partnerships.
 

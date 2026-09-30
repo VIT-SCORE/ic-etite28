@@ -19,7 +19,7 @@ window.COMMITTEE = {
   organizingChair: committeePeople('Professor & Dean (i/c)', 'SCORE', ['Dr. Daphne Lopez']),
   organizingCoChair: committeePeople('Professor & Associate Dean', 'SCORE', ['Dr. Jeyanthi N']),
   conferenceChair: committeePeople('Professor', 'SCORE', ['Dr. John Singh K']),
-  publicationChair: committeePeople('Professor', 'SITE', ['Dr. Vijayan R']),
+  publicationChair: committeePeople('Associate Professor', 'SCORE', ['Dr. Vijayan R']),
   publicationCoChairs: committeePeople('Professor', 'SCORE', ['Dr. Brindha K', 'Dr. Deepa M']),
   financeChair: committeePeople('Associate Professor', 'SCORE', ['Dr. Priya M']),
   financeCoChair: committeePeople('Associate Professor', 'SCORE', ['Dr. Rajkumar M']),

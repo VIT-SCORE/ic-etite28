@@ -273,7 +273,7 @@
     var list = element('ol', 'home-timeline');
     window.IMPORTANT_DATES.forEach(function (item) {
       var row = element('li', 'home-timeline-item');
-      row.appendChild(element('strong', 'home-timeline-date', item.date));
+      row.appendChild(element('strong', 'home-timeline-date', item.conferenceDate && window.CONF ? window.CONF.dates : item.date));
       row.appendChild(element('span', 'home-timeline-milestone', item.milestone));
       if (item.note) row.appendChild(element('small', 'home-timeline-note', item.note));
       list.appendChild(row);
@@ -299,7 +299,7 @@
     window.IMPORTANT_DATES.forEach(function (item) {
       var row = element('tr');
       row.appendChild(element('td', '', item.milestone));
-      row.appendChild(element('td', '', item.date));
+      row.appendChild(element('td', '', item.conferenceDate && window.CONF ? window.CONF.dates : item.date));
       body.appendChild(row);
     });
     table.appendChild(header);
@@ -320,10 +320,10 @@
       node.textContent = window.CONF.organiser;
     });
     document.querySelectorAll('[data-conference-dates]').forEach(function (node) {
-      node.textContent = window.CONF.dates.replace('-', '–');
+      node.textContent = window.CONF.dates;
     });
     document.querySelectorAll('[data-conference-dates-short]').forEach(function (node) {
-      node.textContent = window.CONF.dates.replace(' February ', ' Feb ').replace('-', '–');
+      node.textContent = window.CONF.dates.replace(' February ', ' Feb ');
     });
     document.querySelectorAll('[data-conference-supported-by]').forEach(function (node) {
       node.textContent = window.CONF.supportedBy.join(' · ');

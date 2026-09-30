@@ -119,23 +119,25 @@
     var videoSource = heroVideo.querySelector('source[data-src]');
     var videoTimer;
     var updateHeroVideo = function(){
-      var shouldPlay = window.innerWidth >= 768 && !motionPreference.matches;
+      var shouldPlay = desktopViewport.matches && !motionPreference.matches;
       if(!shouldPlay){
         heroVideo.pause();
         heroVideo.removeAttribute('autoplay');
+        heroVideo.hidden = true;
         if(videoSource && videoSource.hasAttribute('src')){
           videoSource.removeAttribute('src');
           heroVideo.load();
         }
         return;
       }
+      heroVideo.hidden = false;
       if(videoSource && !videoSource.getAttribute('src')){
         videoSource.setAttribute('src', videoSource.dataset.src);
         heroVideo.load();
       }
       heroVideo.setAttribute('autoplay', '');
       var playRequest = heroVideo.play();
-      if(playRequest && playRequest.catch) playRequest.catch(function(){});
+      if(playRequest && playRequest.catch) playRequest.catch(function(){ heroVideo.hidden = true; });
     };
     window.addEventListener('resize', function(){
       window.clearTimeout(videoTimer);

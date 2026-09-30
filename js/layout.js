@@ -3,7 +3,7 @@
 
   var conference = window.CONF || {
     name: "ic-ETITE'28",
-    dates: '10-11 February 2028',
+    dates: '',
     email: 'icetiteconference@vit.ac.in',
     address: 'Vellore Institute of Technology, Katpadi, Vellore, Tamil Nadu 632014, India'
   };
@@ -98,7 +98,7 @@
             '<li><a href="advisory.html">Advisory Board</a></li><li><a href="venue.html">Venue &amp; Travel</a></li>' +
             '<li><a href="events.html">Co-located Events</a></li><li><a href="keynote-speakers.html">Keynote Speakers</a></li>' +
             '<li><a href="contact.html">Contact &amp; Help Desk</a></li><li><a href="sponsorship.html">Sponsorships</a></li>' +
-            '<li><a href="icetite20.html">ic-ETITE\'20 archive</a></li>' +
+            '<li><a href="about.html#highlights">ic-ETITE\'20 archive</a></li>' +
           '</ul></div>' +
           '<div><h2>Authors &amp; Papers</h2><ul class="footer-links">' +
             '<li><a href="call-for-papers.html">Call for Papers</a></li><li><a href="tracks.html">Research Tracks</a></li>' +
