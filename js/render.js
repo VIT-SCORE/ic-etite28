@@ -74,6 +74,10 @@
     ];
     var activeKey = mount.dataset.active || 'organizing';
     var knownKeys = committeeTabs.map(function (tab) { return tab.key; });
+    var initialView = 'list';
+    try {
+      if (window.localStorage.getItem('icEtiteCommitteeView') === 'cards') initialView = 'cards';
+    } catch (error) {}
 
     function recordsForOrganizing(query) {
       var groups = [];
@@ -173,6 +177,35 @@
 
     var shell = element('div', 'committee-tabs-component');
     shell.appendChild(renderContacts());
+    var viewToolbar = element('div', 'committee-view-toolbar');
+    var viewToggle = element('div', 'committee-view-toggle');
+    viewToggle.setAttribute('role', 'group');
+    viewToggle.setAttribute('aria-label', 'Committee view');
+    var listButton = element('button', 'committee-view-button', 'List');
+    listButton.type = 'button';
+    var cardsButton = element('button', 'committee-view-button', 'Cards');
+    cardsButton.type = 'button';
+    function setView(view, persist) {
+      var isList = view === 'list';
+      mount.classList.toggle('view-list', isList);
+      mount.classList.toggle('view-cards', !isList);
+      listButton.setAttribute('aria-pressed', String(isList));
+      cardsButton.setAttribute('aria-pressed', String(!isList));
+      if (persist) {
+        try {
+          window.localStorage.setItem('icEtiteCommitteeView', isList ? 'list' : 'cards');
+        } catch (error) {}
+      }
+    }
+    listButton.setAttribute('aria-pressed', 'false');
+    cardsButton.setAttribute('aria-pressed', 'false');
+    listButton.addEventListener('click', function () { setView('list', true); });
+    cardsButton.addEventListener('click', function () { setView('cards', true); });
+    viewToggle.appendChild(listButton);
+    viewToggle.appendChild(cardsButton);
+    viewToolbar.appendChild(viewToggle);
+    setView(initialView, false);
+    shell.appendChild(viewToolbar);
     var tabList = element('div', 'committee-tabs');
     tabList.setAttribute('role', 'tablist');
     tabList.setAttribute('aria-label', 'Conference committees');
