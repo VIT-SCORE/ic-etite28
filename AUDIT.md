@@ -11,7 +11,10 @@
 | File | Current content |
 |---|---|
 | `index.html` | Home page |
+| `about.html` | Conference, theme, host, organizing school, society, and previous editions |
 | `call-for-papers.html` | Renamed from `authors.html`; author guidance and dates |
+| `tracks.html` | Research topics rendered from `data/topics.js` |
+| `important-dates.html` | Conference timeline rendered from `data/dates.js` and `data/conference.js` |
 | `registration.html` | Renamed from `registrations.html`; fees and registration steps |
 | `committees.html` | Renamed from `committee.html`; renders organizing rosters from data |
 | `advisory.html` | Thin entry page to the shared committee tabs, initially on International Advisory |
@@ -20,20 +23,24 @@
 | `visa.html` | Visa information |
 | `venue.html` | Renamed from `hotel.html`; accommodation and travel information |
 | `keynote-speakers.html` | Renamed from `speakers.html`; keynote content |
+| `events.html` | Conference and co-located event directory |
+| `hackathon.html` | BOLT 3.0 coordinators and BOLT 2.0 history |
+| `technext.html` | TechNext '28 Expo committee and booking TODO |
+| `team.html` | IEEE ITS website team TODO roster |
 | `contact.html` | Contact information and client-side email form |
 
 Redirect stubs remain at `authors.html`, `registrations.html`, `committee.html`, `hotel.html`, and `speakers.html`.
 
 ## Target Sitemap Status
 
-The live target has 16 routes. Eleven canonical pages now exist. The seven requested pages deliberately deferred to later steps are `about.html`, `tracks.html`, `important-dates.html`, `events.html`, `hackathon.html`, `technext.html`, and `team.html`. Header/footer links to those not-yet-created pages are intentional for this intermediate step. The live target routes were previously checked and returned HTTP 200.
+The live target has 18 canonical routes, including all seven pages that were deferred in the earlier build stage. Five legacy filenames remain as redirect stubs. Shared navigation destinations now resolve to real pages.
 
 ## Styles, Scripts, and Data
 
 - `assets/css/style.css`: shared color palette, typography, layout, components, responsive rules, reduced-motion behavior, and token-based styles for the injected header/footer.
 - `assets/js/main.js`: scroll behavior, hamburger menu, homepage scrollspy, marquee, tabs, copy-email, back-to-top, hero entrance animation/video gating, and contact form.
 - `js/layout.js`: shared responsive navigation and footer, dropdown/touch/keyboard behavior, active-page indication, and footer facts from `CONF`.
-- `js/render.js`: safe DOM rendering for registration fees and organizing committee groups.
+- `js/render.js`: DOM rendering for registration fees, committee groups, dates, research tracks, edition highlights, event coordinators, speakers, and the web team.
 - `data/conference.js`: `window.CONF` event identity, dates, organiser, location, links, and address.
 - `data/dates.js`, `data/fees.js`, `data/topics.js`, `data/committee.js`, `data/advisory.js`, `data/contacts.js`, `data/speakers.js`, and `data/editions.js`: their corresponding source-derived globals. The speakers array is empty because no 2028 speakers are named in the source.
 - Shared marks: `assets/12Asset 1.svg` is a resolution-independent conference logo; `assets/vit-white-logo.png` renders at 177×44 in the wide header. The top bar uses a locally optimized IEEE ITS emblem and the SCORE seal.
@@ -43,10 +50,10 @@ The live target has 16 routes. Eleven canonical pages now exist. The seven reque
 
 ## Content Flags and Remaining Stale Text
 
-- Step 2 corrected the PDF submission-date typo to 05 October 2027 and records the organiser confirmation note in the data. Dr. Vijayan R's designation differs between the committee and contact sources. Dr. M. P. Rajan's affiliation still carries the PDF conflict and needs confirmation. The source spelling `Sarakar` and topic `Computation Intelligence` remain uncorrected pending organiser confirmation.
+- Step 2 corrected the PDF submission-date typo to 05 October 2027 and records the organizer confirmation note in the data. The Publication Chair uses Associate Professor, SCORE consistently; its source conflict TODO is recorded once in `data/contacts.js`. Dr. M. P. Rajan's affiliation still carries the PDF conflict and needs confirmation. The source spelling `Sarakar` and topic `Computation Intelligence` remain uncorrected pending organizer confirmation.
 - The injected footer uses SCORE, omits the 2024 brochure and NOC links, retains links to `sponsorship.html` and `icetite20.html`, and has the required VIT, ranking, contact, directory, and date content.
 - The homepage no longer links to the old CMT portal, 2024 brochure, or `TECHNEXT 24`. Historical ic-ETITE'24 facts appear intentionally in the previous-editions card, using the PDF figures. `call-for-papers.html` now uses EasyChair and current 2027/2028 deadlines; unsupported template, presentation, and PDF eXpress items are marked TODO.
-- 2020 event details in `icetite20.html` and references to the SITE acronym in historical affiliation/source data are intentional context. The old `ic-ETITE '26` page titles have been corrected to `ic-ETITE'28`.
+- 2020/2024 details are intentionally retained in the history, edition data, and source brief. The source brief preserves the original PDF's SITE affiliation text; active committee data uses SCORE. A final repository sweep found no live ic-ETITE'26 references.
 - External link reachability and embedded image text have not been exhaustively checked.
 
 ## Step 2-3 and 7 Browser Checks
@@ -92,8 +99,7 @@ The 360/768/1280 browser pass found no page/header overflow or broken images. At
 - Confirm presentation format and requirements for 2028.
 - Confirm whether IEEE PDF eXpress instructions apply to the 2028 proceedings.
 - Confirm the corrected 05 October 2027 submission date with organizers; the PDF says “05 October 207”.
-- Resolve Dr. Vijayan R's Associate Professor / Professor designation discrepancy.
 - Confirm Dr. M. P. Rajan's affiliation; the PDF includes both IIIT Kottayam and “Delhi”.
 - Confirm the spellings “Sarakar” and “Computation Intelligence” with organizers.
 - Name 2028 keynote speakers when confirmed; none are provided in the source.
-- Provide the remaining seven target pages listed above in their later implementation steps.
+- Replace the canonical and Open Graph URL placeholder after the official domain is confirmed.

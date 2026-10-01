@@ -53,7 +53,7 @@ window.COMMITTEE = {
   guestCareCommittee: [
     { name: 'Dr. Dharmendra Singh Rajput', role: 'Professor', affiliation: 'SCORE' },
     { name: 'Dr. Srinivasan P', role: 'Professor', affiliation: 'SCORE' },
-    { name: 'Dr. Magesh G', role: 'Assistant Professor', affiliation: 'SITE' }
+    { name: 'Dr. Magesh G', role: 'Assistant Professor', affiliation: 'SCORE' }
   ],
   conferenceCoordinatingCommittee: committeePeople('Professor', 'SCORE', ['Dr. Hemalatha S', 'Dr. Anitha A', 'Dr. Pounambal M', 'Dr. Usha Devi G', 'Dr. Jagadeesh G']).concat(
     committeePeople('Associate Professor', 'SCORE', ['Dr. Kamalakannan J', 'Dr. Jayaram Reddy A', 'Dr. Mala Serene I', 'Dr. Nirmala M', 'Dr. Mythili N'])
