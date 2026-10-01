@@ -800,6 +800,14 @@ footer p{font-size:.9rem;line-height:1.7;color:rgba(255,255,255,0.55);}
 .hero .hero-actions{display:grid;grid-template-columns:repeat(4,max-content);gap:10px;align-items:start;}
 .hero .hero-actions a,.hero .hero-actions button{min-height:46px;display:inline-flex;align-items:center;justify-content:center;}
 
+.track-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start;}
+.track-group{min-width:0;border:1px solid var(--paper-100);border-radius:var(--radius-card);background:var(--white);box-shadow:var(--shadow-card-hover);}
+.track-group summary{padding:20px 24px;color:var(--navy-950);font-family:var(--font-display);font-size:1.1rem;font-weight:700;cursor:pointer;}
+.track-group summary:focus-visible{outline:3px solid var(--amber-500);outline-offset:3px;border-radius:var(--radius-sm);}
+.track-topic-list{columns:2;column-gap:30px;margin:0;padding:0 24px 24px 42px;color:var(--slate-700);}
+.track-topic-list li{break-inside:avoid;padding:3px 0;font-size:.88rem;}
+@media(max-width:767px){.track-grid{grid-template-columns:1fr;}.track-topic-list{columns:1;}}
+
 @media (max-width:767px){
   .hero-video{display:none;}
   .hero-poster{display:block;}

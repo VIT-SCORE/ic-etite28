@@ -314,6 +314,23 @@
     mount.replaceChildren(content);
   }
 
+  function renderTracks() {
+    var mount = document.getElementById('conference-tracks');
+    if (!mount || !window.TOPICS) return;
+    var topics = window.TOPICS;
+    Object.keys(topics).forEach(function (key, index) {
+      var group = topics[key];
+      var details = element('details', 'track-group');
+      if (index === 0) details.open = true;
+      var summary = element('summary', '', group.title);
+      details.appendChild(summary);
+      var list = element('ul', 'track-topic-list');
+      group.items.forEach(function (topic) { list.appendChild(element('li', '', topic)); });
+      details.appendChild(list);
+      mount.appendChild(details);
+    });
+  }
+
   function renderConferenceFacts() {
     if (!window.CONF) return;
     document.querySelectorAll('[data-conference-organiser]').forEach(function (node) {
@@ -415,6 +432,7 @@
     renderCommittee();
     renderHomeDates();
     renderDateTable();
+    renderTracks();
     renderHomeEditions();
   }
 
