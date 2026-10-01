@@ -44,8 +44,8 @@ window.COMMITTEE = {
     { name: 'Dr. Brijendra Singh', role: 'Associate Professor', affiliation: 'SCORE' },
     { name: 'Dr. Krishnamoorthy N', role: 'Associate Professor', affiliation: 'SCORE' }
   ],
-  technextExpoCommittee: committeePeople('Assistant Professor', 'SCORE', ['Dr. Balaji E', 'Dr. Balasubramani M', 'Dr. Arun Kumar A']).concat(
-    committeePeople('Associate Professor', 'SCORE', ['Dr. Raghavan R'])
+  technextExpoCommittee: committeePeople('Associate Professor', 'SCORE', ['Dr. Raghavan R']).concat(
+    committeePeople('Assistant Professor', 'SCORE', ['Dr. Balaji E', 'Dr. Balasubramani M', 'Dr. Arun Kumar A'])
   ),
   eventManagementCommittee: committeePeople('Professor', 'SCORE', ['Dr. Srinivas Koppu', 'Dr. Vanmathi C', 'Dr. Mangayarkarasi R', 'Dr. Sudha M']).concat(
     committeePeople('Associate Professor', 'SCORE', ['Dr. Gundala Swathi', 'Dr. Chemmalar Selvi G'])

@@ -331,6 +331,49 @@
     });
   }
 
+  function renderPeopleMount(mountId, people, emptyText) {
+    var mount = document.getElementById(mountId);
+    if (!mount) return;
+    if (!people || !people.length) {
+      mount.appendChild(element('p', 'callout', emptyText || 'Information will be announced by the organizers.'));
+      return;
+    }
+    people.forEach(function (person) {
+      var card = element('article', 'simple-card');
+      card.appendChild(element('h3', '', person.name));
+      if (person.role) card.appendChild(element('div', 'role', person.role));
+      if (person.affiliation) card.appendChild(element('p', '', person.affiliation));
+      if (person.title) card.appendChild(element('p', '', person.title));
+      mount.appendChild(card);
+    });
+  }
+
+  function renderEventPeople() {
+    if (window.COMMITTEE) {
+      renderPeopleMount('bolt-coordinators', window.COMMITTEE.boltHackathon, 'BOLT 3.0 coordinators will be announced.');
+      renderPeopleMount('technext-committee', window.COMMITTEE.technextExpoCommittee, 'The TechNext ’28 committee will be announced.');
+    }
+    renderPeopleMount('web-team-list', window.WEB_TEAM, window.WEB_TEAM_TODO);
+    var boltHistory = document.getElementById('bolt-history-stat');
+    if (boltHistory && window.EDITIONS) {
+      var priorBolt = window.EDITIONS.filter(function (edition) { return edition.name === "ic-ETITE'24"; })[0];
+      if (priorBolt) {
+        var stat = element('div', 'cell');
+        stat.appendChild(element('div', 'num', priorBolt.boltRegistrations));
+        stat.appendChild(element('div', 'cap', 'BOLT 2.0 registrations (' + priorBolt.dates.slice(-4) + ')'));
+        boltHistory.appendChild(stat);
+      }
+    }
+    var speakersMount = document.getElementById('speaker-lineup');
+    if (speakersMount) {
+      if (!window.SPEAKERS || !window.SPEAKERS.length) {
+        speakersMount.appendChild(element('p', 'callout', 'Speakers to be announced.'));
+      } else {
+        renderPeopleMount('speaker-lineup', window.SPEAKERS, 'Speakers to be announced.');
+      }
+    }
+  }
+
   function renderConferenceFacts() {
     if (!window.CONF) return;
     document.querySelectorAll('[data-conference-organiser]').forEach(function (node) {
@@ -433,6 +476,7 @@
     renderHomeDates();
     renderDateTable();
     renderTracks();
+    renderEventPeople();
     renderHomeEditions();
   }
 
