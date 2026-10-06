@@ -13,6 +13,7 @@ Extracted from `assets/css/style.css`. These tokens document and centralize the 
 | `--ice-300` | `#9AEAF2` | Light cyan text accents |
 | `--amber-500` | `#E8A23D` | Primary warm accent and buttons |
 | `--amber-600` | `#D68A22` | Darker amber hover state |
+| `--amber-text` | `#8A4B00` | Accessible amber text on light surfaces |
 | `--paper-50` | `#F4F8FB` | Main page background and soft surfaces |
 | `--paper-100` | `#E8EFF5` | Borders and dividers |
 | `--slate-700` | `#33455A` | Main body text |

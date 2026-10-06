@@ -38,11 +38,11 @@
       '<div class="site-topbar"><div class="wrap">' +
         '<a class="topbar-title" href="index.html">' + conference.name + '</a>' +
         '<a class="topbar-chapter" href="https://ieee-its-1-tzbd.vercel.app/" target="_blank" rel="noopener">' +
-          '<img class="chapter-logo" src="assets/images/ieee-its-circle-logo.jpg" alt="IEEE Information Theory Society emblem"><span>IEEE ITS VIT VELLORE</span>' +
+          '<img class="chapter-logo" src="assets/images/ieee-its-circle-logo.jpg" alt="IEEE Information Theory Society emblem" width="22" height="22"><span>IEEE ITS VIT VELLORE</span>' +
         '</a>' +
       '</div></div>' +
       '<nav class="site-nav" id="siteNav" aria-label="Main navigation"><div class="wrap">' +
-        '<a class="brand" href="index.html" aria-label="ic-ETITE\'28 home"><img class="brand-logo" src="assets/12Asset 1.svg" alt="ic-ETITE\'28"></a>' +
+        '<a class="brand" href="index.html" aria-label="ic-ETITE\'28 home"><img class="brand-logo" src="assets/12Asset 1.svg" alt="ic-ETITE\'28" width="170" height="52"></a>' +
         '<button class="burger" id="burgerBtn" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>' +
         '<ul class="nav-links" id="navLinks">' +
           navLink('index.html', 'Home') +
@@ -74,7 +74,7 @@
           '<a class="nav-action" href="technext.html">TechNext \'28</a>' +
           '<a class="nav-action nav-action-secondary" href="hackathon.html">BOLT 3.0</a>' +
           '<a class="vit-action" href="https://vit.ac.in/" target="_blank" rel="noopener" aria-label="VIT official website">' +
-            '<img src="assets/vit-white-logo.png" alt="Vellore Institute of Technology">' +
+            '<picture><source media="(max-width: 75rem)" srcset="assets/vit_white.png"><img src="assets/vit-white-logo.png" alt="Vellore Institute of Technology" width="177" height="44"></picture>' +
           '</a>' +
         '</div>' +
       '</div></nav>';
@@ -84,7 +84,7 @@
     footerMount.innerHTML =
       '<footer class="site-footer" id="contact-block"><div class="wrap">' +
         '<div class="footer-host-row">' +
-          '<a class="footer-vit" href="https://vit.ac.in/" target="_blank" rel="noopener"><img src="assets/vit-white-logo.png" alt="Vellore Institute of Technology"></a>' +
+          '<a class="footer-vit" href="https://vit.ac.in/" target="_blank" rel="noopener"><img src="assets/vit-white-logo.png" alt="Vellore Institute of Technology" width="177" height="44" loading="lazy"></a>' +
           '<p>NAAC A++ (CGPA 3.66 / 4.0) <span aria-hidden="true">&middot;</span> NIRF 2025: 14th University, 14th Research, 16th Engineering</p>' +
         '</div>' +
         '<div class="footer-grid">' +

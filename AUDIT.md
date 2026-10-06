@@ -38,13 +38,13 @@ The live target has 18 canonical routes, including all seven pages that were def
 ## Styles, Scripts, and Data
 
 - `assets/css/style.css`: shared color palette, typography, layout, components, responsive rules, reduced-motion behavior, and token-based styles for the injected header/footer.
-- `assets/js/main.js`: scroll behavior, hamburger menu, homepage scrollspy, marquee, tabs, copy-email, back-to-top, hero entrance animation/video gating, and contact form.
+- `assets/js/main.js`: scroll behavior, hamburger menu, homepage scrollspy, marquee, tabs, copy-email, back-to-top, hero entrance animation, and contact form.
 - `js/layout.js`: shared responsive navigation and footer, dropdown/touch/keyboard behavior, active-page indication, and footer facts from `CONF`.
 - `js/render.js`: DOM rendering for registration fees, committee groups, dates, research tracks, edition highlights, event coordinators, speakers, and the web team.
 - `data/conference.js`: `window.CONF` event identity, dates, organiser, location, links, and address.
 - `data/dates.js`, `data/fees.js`, `data/topics.js`, `data/committee.js`, `data/advisory.js`, `data/contacts.js`, `data/speakers.js`, and `data/editions.js`: their corresponding source-derived globals. The speakers array is empty because no 2028 speakers are named in the source.
 - Shared marks: `assets/12Asset 1.svg` is a resolution-independent conference logo; `assets/vit-white-logo.png` renders at 177×44 in the wide header. The top bar uses a locally optimized IEEE ITS emblem and the SCORE seal.
-- Downloaded local Step 4 images: conference dais/auditorium, VIT campus, SCORE labs, IEEE ITS workshop, and the 2020/2024 inaugural photos. Each optimized JPEG is under 90 KB; the seal SVG is about 71 KB and ITS emblem about 3 KB. `assets/Video/videoplayback-2abc.mp4` is 2,642,844 bytes.
+- Downloaded local images: conference dais/auditorium, VIT campus, SCORE labs, IEEE ITS workshop, and the 2020/2024 inaugural photos. Each optimized JPEG is under 90 KB; the seal SVG is about 71 KB and ITS emblem about 3 KB. The VIT campus JPEG is the static homepage hero background.
 - No approved IEEE Madras Section logo exists in the repo, and the attempted official site URL returned 404. The sponsor name remains visible with an explicit logo TODO.
 - `STYLE.md` documents the shared design tokens. `assets/images/` now holds the homepage media; `ic-ETITE24/` was empty in the initial tree.
 
@@ -53,8 +53,11 @@ The live target has 18 canonical routes, including all seven pages that were def
 - Step 2 corrected the PDF submission-date typo to 05 October 2027 and records the organizer confirmation note in the data. The Publication Chair uses Associate Professor, SCORE consistently; its source conflict TODO is recorded once in `data/contacts.js`. Dr. M. P. Rajan's affiliation still carries the PDF conflict and needs confirmation. The source spelling `Sarakar` and topic `Computation Intelligence` remain uncorrected pending organizer confirmation.
 - The injected footer uses SCORE, omits the 2024 brochure and NOC links, retains links to `sponsorship.html` and `icetite20.html`, and has the required VIT, ranking, contact, directory, and date content.
 - The homepage no longer links to the old CMT portal, 2024 brochure, or `TECHNEXT 24`. Historical ic-ETITE'24 facts appear intentionally in the previous-editions card, using the PDF figures. `call-for-papers.html` now uses EasyChair and current 2027/2028 deadlines; unsupported template, presentation, and PDF eXpress items are marked TODO.
-- 2020/2024 details are intentionally retained in the history, edition data, and source brief. The source brief preserves the original PDF's SITE affiliation text; active committee data uses SCORE. A final repository sweep found no live ic-ETITE'26 references.
-- External link reachability and embedded image text have not been exhaustively checked.
+- Historical 2020/2024 details remain in `about.html`, `hackathon.html`, `data/editions.js`, and the edition renderer in `js/render.js`. The source brief retains PDF wording that names the former SITE school and the conflicting Publication Chair listing; active committee data uses SCORE.
+- All active NIRF mentions include 14th University, 14th Research, and 16th Engineering: `index.html:53,62,113`, `about.html:72`, and the shared footer in `js/layout.js:88`. No active `#10`, over-1,000-delegate, or Double-Blind claim remains; the speaker-announcement wording is limited to the keynote placeholder.
+- The cleanup request called the stale conference-year count eight but listed ten locations. All ten listed instances were corrected: `contact.html`, `registration.html`, `sponsorship.html`, `visa.html` (two), `venue.html`, `call-for-papers.html` (two), and `keynote-speakers.html` (two). The post-fix conference-name grep returns zero matches.
+- Group 5 grep manifest (PDF binary excluded): `2024` remains intentionally in `about.html:7`, `hackathon.html:19`, `data/editions.js:5`, `js/render.js:395-454`, this audit's history notes, and the preserved source brief (`icetite28_agent_prompt_html.md:32,84,86,90,99,122,126-127,140,166,182,443`). Exact uppercase `SITE` remains only in this audit and the preserved source brief (`icetite28_agent_prompt_html.md:32,140,150,281,302`) as historical/source wording; active school and committee records use SCORE. `cmt3` occurs only in the source brief's search instructions (`:32,140`), not in live links. `Expo'24` occurs only in the source brief's old navigation/reference notes (`:32,72,140,436`). `ic-ETITE_24` has no remaining matches. The conference-name/2026 grep is clear.
+- External links checked in the Group 6 review include VIT and the IEEE ITS chapter site. The two registration buttons still use the old ICETITE 2024 portal path; the 2028 destinations are unknown and require organizer confirmation. Other endpoints that did not respond to the checker are listed as unverified rather than labelled broken.
 
 ## Step 2-3 and 7 Browser Checks
 
@@ -69,25 +72,26 @@ The live target has 18 canonical routes, including all seven pages that were def
 
 ## Step 4 Homepage Status
 
-All 15 requested homepage sections are present:
+All 16 requested homepage sections are present:
 
-1. Hero with poster-backed video, organizer, date, and four correctly ordered actions.
-2. Badge strip for SCORE/VIT, IEEE ITS, NAAC, and NIRF.
-3. Four key-fact items.
-4. About ic-ETITE'28 with two conference photos.
-5. Conference theme.
-6. About VIT with two campus/lab photos, official link, and PDF ranking claims.
-7. About SCORE with programme list, portal link, and seal.
-8. About IEEE ITS VIT with chapter link and workshop photo.
-9. Previous editions with data-rendered ic-ETITE'24 and ic-ETITE'20 stats, Xplore links, and history links.
-10. Technical co-sponsor/support and organizing-school row.
-11. Scopus publication note.
-12. Call for Papers block with EasyChair CTA and manuscript compliance rules.
-13. Important-dates timeline rendered from `data/dates.js`.
-14. Keynote teaser with speakers-to-be-announced state.
-15. Shared footer.
+1. Hero with the static `assets/VIT.jpeg` background, dark text-contrast overlay, organizer, date, and four correctly ordered actions.
+2. Quick Resources grid directly below the hero, with five amber buttons per desktop row and visibly disabled TODO states for unavailable 2028 downloads/guidelines.
+3. About ic-ETITE'28 directly below Quick Resources, with conference purpose and the single `assets/images/conference-dais.jpg` image from the Step 4 media inventory; the two-photo item is satisfied with one conference image.
+4. Badge strip for SCORE/VIT, IEEE ITS, NAAC, and NIRF.
+5. Four key-fact items.
+6. Conference theme.
+7. About VIT with two campus/lab photos, official link, and PDF ranking claims.
+8. About SCORE with programme list, portal link, and seal.
+9. About IEEE ITS VIT with chapter link and workshop photo.
+10. Previous editions with data-rendered ic-ETITE'24 and ic-ETITE'20 stats, Xplore links, and history links.
+11. Technical co-sponsor/support and organizing-school row.
+12. Scopus publication note.
+13. Call for Papers block with EasyChair CTA and manuscript compliance rules.
+14. Important-dates timeline rendered from `data/dates.js`.
+15. Keynote teaser with speakers-to-be-announced state.
+16. Shared footer.
 
-The hero video uses `muted`, `loop`, `playsinline`, `preload="metadata"`, and the local VIT JPEG poster. The MP4 is loaded only for motion-allowed viewports at least 768px wide; below 768px and under reduced motion, the static poster is shown instead.
+The hero uses `assets/VIT.jpeg` as a CSS background. A dark gradient overlay preserves text contrast at every viewport; the hero contains no video markup or playback logic. The MP4 asset, if retained in the repository, is unused by the live page.
 
 The 360/768/1280 browser pass found no page/header overflow or broken images. At 360px the hamburger opens; touch-like click opens dropdowns; Tab reaches Events, Enter opens it, and Escape closes it. The VIT header image is 177×44 at desktop width.
 
@@ -103,3 +107,10 @@ The 360/768/1280 browser pass found no page/header overflow or broken images. At
 - Confirm the spellings “Sarakar” and “Computation Intelligence” with organizers.
 - Name 2028 keynote speakers when confirmed; none are provided in the source.
 - Replace the canonical and Open Graph URL placeholder after the official domain is confirmed.
+- Add confirmed BOLT 3.0 dates, rules, prizes, and registration details in `hackathon.html`.
+- Add the TechNext '28 registration/stall-booking destination in `technext.html`.
+- Add confirmed website team names in `data/team.js`.
+- Replace the two 2024 portal destinations on `registration.html` after organizers provide 2028 registration URLs.
+- The common canonical/Open Graph TODO occurs on every HTML page (23 files); the matching domain TODO also occurs in `robots.txt` and `sitemap.xml`.
+
+Final verification: the hero JPEG and overlay were checked in Edge at 1280px, 360px, and with reduced-motion emulation; each rendered the same static background and all four actions/date remained present. The hero DOM has zero video elements. A cache-busted stylesheet load was needed because the local browser initially held an earlier CSS response. The VIT logo is visible at 128Ã—32 on mobile and 177Ã—44 on desktop. W3C Nu reported zero errors on all 23 HTML files. The sitewide browser sweep confirmed one H1 and no horizontal overflow at 360/768/1280px.

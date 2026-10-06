@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: Replace TODO.invalid after organizers confirm the official site domain.
+Sitemap: https://TODO.invalid/sitemap.xml

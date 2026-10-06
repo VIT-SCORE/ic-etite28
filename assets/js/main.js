@@ -112,48 +112,12 @@
     });
   }
 
-  var heroVideo = document.getElementById('heroVideo');
-  if(heroVideo){
-    var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var desktopViewport = window.matchMedia('(min-width: 768px)');
-    var videoSource = heroVideo.querySelector('source[data-src]');
-    var videoTimer;
-    var updateHeroVideo = function(){
-      var shouldPlay = desktopViewport.matches && !motionPreference.matches;
-      if(!shouldPlay){
-        heroVideo.pause();
-        heroVideo.removeAttribute('autoplay');
-        heroVideo.hidden = true;
-        if(videoSource && videoSource.hasAttribute('src')){
-          videoSource.removeAttribute('src');
-          heroVideo.load();
-        }
-        return;
-      }
-      heroVideo.hidden = false;
-      if(videoSource && !videoSource.getAttribute('src')){
-        videoSource.setAttribute('src', videoSource.dataset.src);
-        heroVideo.load();
-      }
-      heroVideo.setAttribute('autoplay', '');
-      var playRequest = heroVideo.play();
-      if(playRequest && playRequest.catch) playRequest.catch(function(){ heroVideo.hidden = true; });
-    };
-    window.addEventListener('resize', function(){
-      window.clearTimeout(videoTimer);
-      videoTimer = window.setTimeout(updateHeroVideo, 120);
-    });
-    if(motionPreference.addEventListener) motionPreference.addEventListener('change', updateHeroVideo);
-    if(desktopViewport.addEventListener) desktopViewport.addEventListener('change', updateHeroVideo);
-    updateHeroVideo();
-  }
-
   /* ---------- Footer year ---------- */
   var yearEl = document.getElementById('year');
   if(yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------- One orchestrated hero entrance ---------- */
-  var heroEls = document.querySelectorAll('.hero h1, .hero .lead, .hero-sponsor, .hero-date, .hero-meta, .hero-actions, .hero-links, .page-hero .crumb, .page-hero h1, .page-hero p');
+  var heroEls = document.querySelectorAll('.hero h1, .hero .lead, .hero-sponsor, .hero-date, .hero-meta, .hero-actions, .hero .hero-links, .page-hero .crumb, .page-hero h1, .page-hero p');
   heroEls.forEach(function(el, i){
     el.style.opacity = '0';
     el.style.transform = 'translateY(14px)';
