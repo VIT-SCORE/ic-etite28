@@ -42,7 +42,7 @@
         '</a>' +
       '</div></div>' +
       '<nav class="site-nav" id="siteNav" aria-label="Main navigation"><div class="wrap">' +
-        '<a class="brand" href="index.html" aria-label="ic-ETITE\'28 home"><img class="brand-logo" src="assets/12Asset 1.svg" alt="ic-ETITE\'28" width="170" height="52"></a>' +
+        '<a class="brand" href="index.html" aria-label="ic-ETITE\'28 home"><img class="brand-logo" src="assets/ic-tite%20logo.svg" alt="ic-ETITE\'28" width="170" height="52"></a>' +
         '<button class="burger" id="burgerBtn" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>' +
         '<ul class="nav-links" id="navLinks">' +
           '<li class="mobile-nav-actions" aria-label="Featured links">' +
